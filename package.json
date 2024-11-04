@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "del-cli ./build/*",
+    "build": "yarn run clean && tsc",
+    "generate": "del-cli src/api && openapi-generator-cli generate -i ./openapi.yaml -g typescript-axios -o ./src/api --config ./openapi-generator-config.json --inline-schema-options 'REFACTOR_ALLOF_INLINE_SCHEMAS=true'",
+    "generate:wrapper": "ts-node -P tsconfig.scripts.json scripts/generate-wrapper.ts",
+    "generate:all": "yarn generate && yarn generate:wrapper"
+  },
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.14.1",
+    "mustache": "^4.2.0",
+    "type-fest": "^4.26.1"
+  },
+  "devDependencies": {
+    "@types/mustache": "^4.2.5",
+    "@types/node": "^22.7.9",
+    "del-cli": "^6.0.0",
+    "js-yaml": "^4.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}

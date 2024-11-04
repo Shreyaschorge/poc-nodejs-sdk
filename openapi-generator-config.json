@@ -1,0 +1,18 @@
+{
+  "withSeparateModelsAndApi": true,
+  "apiPackage": "apis",
+  "modelPackage": "models",
+  "templateDir": "./templates",
+  "modelPropertyNaming": "original",
+  "ensureUniqueParams": true,
+  "generateAliasAsModel": true,
+  "additionalProperties": {
+    "useSingleRequestParameter": true,
+    "withInterfaces": true,
+    "npmName": "@neynar/typescript-sdk",
+    "supportsES6": true,
+    "nullSafeAdditionalProps": true,
+    "withoutRuntimeChecks": false,
+    "paramNaming": "snake_case"
+  }
+}

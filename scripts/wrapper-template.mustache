@@ -1,0 +1,115 @@
+// src/api/neyner-api-client.ts
+import axios, { AxiosError, AxiosInstance } from 'axios';
+import { Configuration } from './configuration';
+import { Logger, silentLogger } from '../logger';
+import { version } from '../../package.json';
+import {
+{{#apis}}
+  {{name}},
+{{/apis}}
+} from './apis';
+import {
+  ErrorRes,
+{{#typesToImport}}
+  {{.}},
+{{/typesToImport}}
+} from './models';
+
+export class NeynarAPIClient {
+  private readonly apiKey: string;
+  private readonly logger: Logger;
+
+  public readonly apis: {
+{{#apis}}
+    {{lowercaseName}}: {{name}};
+{{/apis}}
+  };
+
+  constructor(
+    apiKey: string,
+    {
+      basePath,
+      logger = silentLogger,
+      axiosInstance,
+    }: {
+      basePath?: string;
+      logger?: Logger;
+      axiosInstance?: AxiosInstance;
+    } = {}
+  ) {
+    this.logger = logger;
+
+    if (apiKey === '') {
+      throw new Error(
+        'Attempt to use an authenticated API method without first providing an API key'
+      );
+    }
+
+    this.apiKey = apiKey;
+
+    if (axiosInstance === undefined) {
+      axiosInstance = axios.create({
+        headers: {
+          'x-sdk-version': version,
+        },
+      });
+    }
+    axiosInstance.defaults.decompress = true;
+    axiosInstance.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        if (error.response && [302].includes(error.response.status)) {
+          return {
+            data: {
+              location: error.response.headers.location,
+            },
+          };
+        }
+        if (NeynarAPIClient.isApiErrorResponse(error)) {
+          const apiErrors = error.response.data;
+          this.logger.warn(`API errors: ${JSON.stringify(apiErrors)}`);
+        }
+        throw error;
+      }
+    );
+
+    axiosInstance.defaults.headers['x-sdk-version'] = version;
+    const config: Configuration = new Configuration({
+      basePath: basePath ? `${basePath}/v2` : undefined,
+      apiKey: apiKey,
+    });
+
+    this.apis = {
+{{#apis}}
+      {{lowercaseName}}: new {{name}}(config, undefined, axiosInstance),
+{{/apis}}
+    };
+  }
+
+  public static isApiErrorResponse(
+    error: any
+  ): error is AxiosError<ErrorRes> & { response: any } {
+    if (!(error instanceof AxiosError)) return false;
+    return (
+      error.response?.data !== undefined && 'message' in error.response.data
+    );
+  }
+
+{{#apis}}
+{{#operations}}
+
+  public async {{operationName}}(
+{{#parameters}}
+    {{name}}{{^required}}?{{/required}}: {{type}}{{#hasNext}},{{/hasNext}}
+{{/parameters}}
+  ): Promise<{{returnType}}> {
+    const response = await this.apis{{../lowercaseName}}.{{operationName}}({
+{{#parameters}}
+      {{name}}: {{name}},
+{{/parameters}}
+    });
+    return response.data;
+  }
+{{/operations}}
+{{/apis}}
+}
