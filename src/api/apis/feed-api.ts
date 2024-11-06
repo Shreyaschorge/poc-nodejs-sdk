@@ -1477,7 +1477,7 @@ export interface FeedApiFetchFeedByChannelIdsRequest {
     /**
      * Comma separated list of channel IDs e.g. neynar,farcaster
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof FeedApiFetchFeedByChannelIds
      */
@@ -1556,7 +1556,7 @@ export interface FeedApiFetchFeedByParentUrlsRequest {
     /**
      * Comma separated list of parent_urls
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof FeedApiFetchFeedByParentUrls
      */

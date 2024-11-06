@@ -22,9 +22,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { DeleteFrameResponse } from '../models';
+import type { DeleteFrameReqBody } from '../models';
 // @ts-ignore
-import type { DeleteNeynarFrameRequest } from '../models';
+import type { DeleteFrameResponse } from '../models';
 // @ts-ignore
 import type { ErrorRes } from '../models';
 // @ts-ignore
@@ -44,11 +44,11 @@ import type { FrameValidateListResponse } from '../models';
 // @ts-ignore
 import type { NeynarFrame } from '../models';
 // @ts-ignore
-import type { NeynarFrameCreationRequest } from '../models';
+import type { NeynarFrameCreationReqBody } from '../models';
 // @ts-ignore
-import type { NeynarFrameUpdateRequest } from '../models';
+import type { NeynarFrameUpdateReqBody } from '../models';
 // @ts-ignore
-import type { ValidateFrameActionRequest } from '../models';
+import type { ValidateFrameActionReqBody } from '../models';
 // @ts-ignore
 import type { ValidateFrameActionResponse } from '../models';
 // @ts-ignore
@@ -62,7 +62,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Delete an existing frame, if it was made by the developer (identified by API key)
          * @summary Delete frame
-         * @param {DeleteNeynarFrameRequest} delete_neynar_frame_request  
+         * @param {DeleteFrameReqBody} delete_frame_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<DeleteFrameResponse>} A promise that resolves to a `DeleteFrameResponse` object
@@ -70,9 +70,9 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/delete-neynar-frame)
          * 
          */
-        deleteNeynarFrame: async (delete_neynar_frame_request: DeleteNeynarFrameRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'delete_neynar_frame_request' is not null or undefined
-            assertParamExists('deleteNeynarFrame', 'delete_neynar_frame_request', delete_neynar_frame_request)
+        deleteNeynarFrame: async (delete_frame_req_body: DeleteFrameReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'delete_frame_req_body' is not null or undefined
+            assertParamExists('deleteNeynarFrame', 'delete_frame_req_body', delete_frame_req_body)
             const localVarPath = `/farcaster/frame`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -95,7 +95,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(delete_neynar_frame_request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(delete_frame_req_body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -437,7 +437,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Create a new frame with a list of pages.
          * @summary Create frame
-         * @param {NeynarFrameCreationRequest} neynar_frame_creation_request  
+         * @param {NeynarFrameCreationReqBody} neynar_frame_creation_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<NeynarFrame>} A promise that resolves to a `NeynarFrame` object
@@ -445,9 +445,9 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/publish-neynar-frame)
          * 
          */
-        publishNeynarFrame: async (neynar_frame_creation_request: NeynarFrameCreationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'neynar_frame_creation_request' is not null or undefined
-            assertParamExists('publishNeynarFrame', 'neynar_frame_creation_request', neynar_frame_creation_request)
+        publishNeynarFrame: async (neynar_frame_creation_req_body: NeynarFrameCreationReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'neynar_frame_creation_req_body' is not null or undefined
+            assertParamExists('publishNeynarFrame', 'neynar_frame_creation_req_body', neynar_frame_creation_req_body)
             const localVarPath = `/farcaster/frame`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -470,7 +470,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(neynar_frame_creation_request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(neynar_frame_creation_req_body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -480,7 +480,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Update an existing frame with a list of pages, if it was made by the developer (identified by API key)
          * @summary Update frame
-         * @param {NeynarFrameUpdateRequest} neynar_frame_update_request  
+         * @param {NeynarFrameUpdateReqBody} neynar_frame_update_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<NeynarFrame>} A promise that resolves to a `NeynarFrame` object
@@ -488,9 +488,9 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/update-neynar-frame)
          * 
          */
-        updateNeynarFrame: async (neynar_frame_update_request: NeynarFrameUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'neynar_frame_update_request' is not null or undefined
-            assertParamExists('updateNeynarFrame', 'neynar_frame_update_request', neynar_frame_update_request)
+        updateNeynarFrame: async (neynar_frame_update_req_body: NeynarFrameUpdateReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'neynar_frame_update_req_body' is not null or undefined
+            assertParamExists('updateNeynarFrame', 'neynar_frame_update_req_body', neynar_frame_update_req_body)
             const localVarPath = `/farcaster/frame`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -513,7 +513,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(neynar_frame_update_request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(neynar_frame_update_req_body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -523,7 +523,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Validates a frame against by an interacting user against a Farcaster Hub \\ (In order to validate a frame, message bytes from Frame Action must be provided in hex) 
          * @summary Validate frame action
-         * @param {ValidateFrameActionRequest} validate_frame_action_request  
+         * @param {ValidateFrameActionReqBody} validate_frame_action_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<ValidateFrameActionResponse>} A promise that resolves to a `ValidateFrameActionResponse` object
@@ -531,9 +531,9 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/validate-frame-action)
          * 
          */
-        validateFrameAction: async (validate_frame_action_request: ValidateFrameActionRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'validate_frame_action_request' is not null or undefined
-            assertParamExists('validateFrameAction', 'validate_frame_action_request', validate_frame_action_request)
+        validateFrameAction: async (validate_frame_action_req_body: ValidateFrameActionReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'validate_frame_action_req_body' is not null or undefined
+            assertParamExists('validateFrameAction', 'validate_frame_action_req_body', validate_frame_action_req_body)
             const localVarPath = `/farcaster/frame/validate`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -556,7 +556,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(validate_frame_action_request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(validate_frame_action_req_body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -576,7 +576,7 @@ export const FrameApiFp = function(configuration?: Configuration) {
         /**
          * Delete an existing frame, if it was made by the developer (identified by API key)
          * @summary Delete frame
-         * @param {DeleteNeynarFrameRequest} delete_neynar_frame_request  
+         * @param {DeleteFrameReqBody} delete_frame_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<DeleteFrameResponse>} A promise that resolves to a `DeleteFrameResponse` object
@@ -584,8 +584,8 @@ export const FrameApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/delete-neynar-frame)
          * 
          */
-        async deleteNeynarFrame(delete_neynar_frame_request: DeleteNeynarFrameRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteFrameResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteNeynarFrame(delete_neynar_frame_request, options);
+        async deleteNeynarFrame(delete_frame_req_body: DeleteFrameReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteFrameResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteNeynarFrame(delete_frame_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FrameApi.deleteNeynarFrame']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -716,7 +716,7 @@ export const FrameApiFp = function(configuration?: Configuration) {
         /**
          * Create a new frame with a list of pages.
          * @summary Create frame
-         * @param {NeynarFrameCreationRequest} neynar_frame_creation_request  
+         * @param {NeynarFrameCreationReqBody} neynar_frame_creation_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<NeynarFrame>} A promise that resolves to a `NeynarFrame` object
@@ -724,8 +724,8 @@ export const FrameApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/publish-neynar-frame)
          * 
          */
-        async publishNeynarFrame(neynar_frame_creation_request: NeynarFrameCreationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeynarFrame>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.publishNeynarFrame(neynar_frame_creation_request, options);
+        async publishNeynarFrame(neynar_frame_creation_req_body: NeynarFrameCreationReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeynarFrame>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.publishNeynarFrame(neynar_frame_creation_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FrameApi.publishNeynarFrame']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -733,7 +733,7 @@ export const FrameApiFp = function(configuration?: Configuration) {
         /**
          * Update an existing frame with a list of pages, if it was made by the developer (identified by API key)
          * @summary Update frame
-         * @param {NeynarFrameUpdateRequest} neynar_frame_update_request  
+         * @param {NeynarFrameUpdateReqBody} neynar_frame_update_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<NeynarFrame>} A promise that resolves to a `NeynarFrame` object
@@ -741,8 +741,8 @@ export const FrameApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/update-neynar-frame)
          * 
          */
-        async updateNeynarFrame(neynar_frame_update_request: NeynarFrameUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeynarFrame>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateNeynarFrame(neynar_frame_update_request, options);
+        async updateNeynarFrame(neynar_frame_update_req_body: NeynarFrameUpdateReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NeynarFrame>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateNeynarFrame(neynar_frame_update_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FrameApi.updateNeynarFrame']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -750,7 +750,7 @@ export const FrameApiFp = function(configuration?: Configuration) {
         /**
          * Validates a frame against by an interacting user against a Farcaster Hub \\ (In order to validate a frame, message bytes from Frame Action must be provided in hex) 
          * @summary Validate frame action
-         * @param {ValidateFrameActionRequest} validate_frame_action_request  
+         * @param {ValidateFrameActionReqBody} validate_frame_action_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<ValidateFrameActionResponse>} A promise that resolves to a `ValidateFrameActionResponse` object
@@ -758,8 +758,8 @@ export const FrameApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/validate-frame-action)
          * 
          */
-        async validateFrameAction(validate_frame_action_request: ValidateFrameActionRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidateFrameActionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.validateFrameAction(validate_frame_action_request, options);
+        async validateFrameAction(validate_frame_action_req_body: ValidateFrameActionReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ValidateFrameActionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.validateFrameAction(validate_frame_action_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FrameApi.validateFrameAction']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -786,7 +786,7 @@ export const FrameApiFactory = function (configuration?: Configuration, basePath
          * 
          */
         deleteNeynarFrame(requestParameters: FrameApiDeleteNeynarFrameRequest, options?: RawAxiosRequestConfig): AxiosPromise<DeleteFrameResponse> {
-            return localVarFp.deleteNeynarFrame(requestParameters.delete_neynar_frame_request, options).then((request) => request(axios, basePath));
+            return localVarFp.deleteNeynarFrame(requestParameters.delete_frame_req_body, options).then((request) => request(axios, basePath));
         },
         /**
          * Fetches the frame meta tags from the URL
@@ -896,7 +896,7 @@ export const FrameApiFactory = function (configuration?: Configuration, basePath
          * 
          */
         publishNeynarFrame(requestParameters: FrameApiPublishNeynarFrameRequest, options?: RawAxiosRequestConfig): AxiosPromise<NeynarFrame> {
-            return localVarFp.publishNeynarFrame(requestParameters.neynar_frame_creation_request, options).then((request) => request(axios, basePath));
+            return localVarFp.publishNeynarFrame(requestParameters.neynar_frame_creation_req_body, options).then((request) => request(axios, basePath));
         },
         /**
          * Update an existing frame with a list of pages, if it was made by the developer (identified by API key)
@@ -910,7 +910,7 @@ export const FrameApiFactory = function (configuration?: Configuration, basePath
          * 
          */
         updateNeynarFrame(requestParameters: FrameApiUpdateNeynarFrameRequest, options?: RawAxiosRequestConfig): AxiosPromise<NeynarFrame> {
-            return localVarFp.updateNeynarFrame(requestParameters.neynar_frame_update_request, options).then((request) => request(axios, basePath));
+            return localVarFp.updateNeynarFrame(requestParameters.neynar_frame_update_req_body, options).then((request) => request(axios, basePath));
         },
         /**
          * Validates a frame against by an interacting user against a Farcaster Hub \\ (In order to validate a frame, message bytes from Frame Action must be provided in hex) 
@@ -924,7 +924,7 @@ export const FrameApiFactory = function (configuration?: Configuration, basePath
          * 
          */
         validateFrameAction(requestParameters: FrameApiValidateFrameActionRequest, options?: RawAxiosRequestConfig): AxiosPromise<ValidateFrameActionResponse> {
-            return localVarFp.validateFrameAction(requestParameters.validate_frame_action_request, options).then((request) => request(axios, basePath));
+            return localVarFp.validateFrameAction(requestParameters.validate_frame_action_req_body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1099,10 +1099,10 @@ export interface FrameApiDeleteNeynarFrameRequest {
      * 
      * 
      * 
-     * @type {DeleteNeynarFrameRequest}
+     * @type {DeleteFrameReqBody}
      * @memberof FrameApiDeleteNeynarFrame
      */
-    readonly delete_neynar_frame_request: DeleteNeynarFrameRequest
+    readonly delete_frame_req_body: DeleteFrameReqBody
 }
 
 /**
@@ -1249,10 +1249,10 @@ export interface FrameApiPublishNeynarFrameRequest {
      * 
      * 
      * 
-     * @type {NeynarFrameCreationRequest}
+     * @type {NeynarFrameCreationReqBody}
      * @memberof FrameApiPublishNeynarFrame
      */
-    readonly neynar_frame_creation_request: NeynarFrameCreationRequest
+    readonly neynar_frame_creation_req_body: NeynarFrameCreationReqBody
 }
 
 /**
@@ -1265,10 +1265,10 @@ export interface FrameApiUpdateNeynarFrameRequest {
      * 
      * 
      * 
-     * @type {NeynarFrameUpdateRequest}
+     * @type {NeynarFrameUpdateReqBody}
      * @memberof FrameApiUpdateNeynarFrame
      */
-    readonly neynar_frame_update_request: NeynarFrameUpdateRequest
+    readonly neynar_frame_update_req_body: NeynarFrameUpdateReqBody
 }
 
 /**
@@ -1281,10 +1281,10 @@ export interface FrameApiValidateFrameActionRequest {
      * 
      * 
      * 
-     * @type {ValidateFrameActionRequest}
+     * @type {ValidateFrameActionReqBody}
      * @memberof FrameApiValidateFrameAction
      */
-    readonly validate_frame_action_request: ValidateFrameActionRequest
+    readonly validate_frame_action_req_body: ValidateFrameActionReqBody
 }
 
 /**
@@ -1307,7 +1307,7 @@ export class FrameApi extends BaseAPI implements FrameApiInterface {
      * 
      */
     public deleteNeynarFrame(requestParameters: FrameApiDeleteNeynarFrameRequest, options?: RawAxiosRequestConfig) {
-        return FrameApiFp(this.configuration).deleteNeynarFrame(requestParameters.delete_neynar_frame_request, options).then((request) => request(this.axios, this.basePath));
+        return FrameApiFp(this.configuration).deleteNeynarFrame(requestParameters.delete_frame_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1433,7 +1433,7 @@ export class FrameApi extends BaseAPI implements FrameApiInterface {
      * 
      */
     public publishNeynarFrame(requestParameters: FrameApiPublishNeynarFrameRequest, options?: RawAxiosRequestConfig) {
-        return FrameApiFp(this.configuration).publishNeynarFrame(requestParameters.neynar_frame_creation_request, options).then((request) => request(this.axios, this.basePath));
+        return FrameApiFp(this.configuration).publishNeynarFrame(requestParameters.neynar_frame_creation_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1449,7 +1449,7 @@ export class FrameApi extends BaseAPI implements FrameApiInterface {
      * 
      */
     public updateNeynarFrame(requestParameters: FrameApiUpdateNeynarFrameRequest, options?: RawAxiosRequestConfig) {
-        return FrameApiFp(this.configuration).updateNeynarFrame(requestParameters.neynar_frame_update_request, options).then((request) => request(this.axios, this.basePath));
+        return FrameApiFp(this.configuration).updateNeynarFrame(requestParameters.neynar_frame_update_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1465,7 +1465,7 @@ export class FrameApi extends BaseAPI implements FrameApiInterface {
      * 
      */
     public validateFrameAction(requestParameters: FrameApiValidateFrameActionRequest, options?: RawAxiosRequestConfig) {
-        return FrameApiFp(this.configuration).validateFrameAction(requestParameters.validate_frame_action_request, options).then((request) => request(this.axios, this.basePath));
+        return FrameApiFp(this.configuration).validateFrameAction(requestParameters.validate_frame_action_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

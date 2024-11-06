@@ -160,12 +160,12 @@ export const CastApiAxiosParamCreator = function (configuration?: Configuration)
          * @throws {RequiredError}
          * @returns {Promise<CastComposerActionsListResponse>} A promise that resolves to a `CastComposerActionsListResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-action-list)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-actions)
          * 
          */
-        fetchComposerActionList: async (list: CastComposerType, limit?: number, cursor?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        fetchComposerActions: async (list: CastComposerType, limit?: number, cursor?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'list' is not null or undefined
-            assertParamExists('fetchComposerActionList', 'list', list)
+            assertParamExists('fetchComposerActions', 'list', list)
             const localVarPath = `/farcaster/cast/composer_actions/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -524,13 +524,13 @@ export const CastApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          * @returns {Promise<CastComposerActionsListResponse>} A promise that resolves to a `CastComposerActionsListResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-action-list)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-actions)
          * 
          */
-        async fetchComposerActionList(list: CastComposerType, limit?: number, cursor?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CastComposerActionsListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchComposerActionList(list, limit, cursor, options);
+        async fetchComposerActions(list: CastComposerType, limit?: number, cursor?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CastComposerActionsListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchComposerActions(list, limit, cursor, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CastApi.fetchComposerActionList']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CastApi.fetchComposerActions']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -659,16 +659,16 @@ export const CastApiFactory = function (configuration?: Configuration, basePath?
         /**
          * Fetches all composer actions on Warpcast. You can filter by top or featured.
          * @summary Fetch composer actions
-         * @param {CastApiFetchComposerActionListRequest} requestParameters Request parameters.
+         * @param {CastApiFetchComposerActionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<CastComposerActionsListResponse>} A promise that resolves to a `CastComposerActionsListResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-action-list)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-actions)
          * 
          */
-        fetchComposerActionList(requestParameters: CastApiFetchComposerActionListRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastComposerActionsListResponse> {
-            return localVarFp.fetchComposerActionList(requestParameters.list, requestParameters.limit, requestParameters.cursor, options).then((request) => request(axios, basePath));
+        fetchComposerActions(requestParameters: CastApiFetchComposerActionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastComposerActionsListResponse> {
+            return localVarFp.fetchComposerActions(requestParameters.list, requestParameters.limit, requestParameters.cursor, options).then((request) => request(axios, basePath));
         },
         /**
          * Gets information about an individual cast by passing in a Warpcast web URL or cast hash
@@ -766,16 +766,16 @@ export interface CastApiInterface {
     /**
      * Fetches all composer actions on Warpcast. You can filter by top or featured.
      * @summary Fetch composer actions
-     * @param {CastApiFetchComposerActionListRequest} requestParameters Request parameters.
+     * @param {CastApiFetchComposerActionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CastApiInterface
      * @returns {Promise<CastComposerActionsListResponse>} A promise that resolves to a `CastComposerActionsListResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-action-list)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-actions)
      * 
      */
-    fetchComposerActionList(requestParameters: CastApiFetchComposerActionListRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastComposerActionsListResponse>;
+    fetchComposerActions(requestParameters: CastApiFetchComposerActionsRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastComposerActionsListResponse>;
 
     /**
      * Gets information about an individual cast by passing in a Warpcast web URL or cast hash
@@ -860,7 +860,7 @@ export interface CastApiFetchBulkCastsRequest {
     /**
      * Hashes of the cast to be retrived (Comma separated, no spaces)
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof CastApiFetchBulkCasts
      */
@@ -886,17 +886,17 @@ export interface CastApiFetchBulkCastsRequest {
 }
 
 /**
- * Request parameters for fetchComposerActionList operation in CastApi.
+ * Request parameters for fetchComposerActions operation in CastApi.
  * @export
- * @interface CastApiFetchComposerActionListRequest
+ * @interface CastApiFetchComposerActionsRequest
  */
-export interface CastApiFetchComposerActionListRequest {
+export interface CastApiFetchComposerActionsRequest {
     /**
      * Type of list to fetch.
      * 
      * 
      * @type {CastComposerType}
-     * @memberof CastApiFetchComposerActionList
+     * @memberof CastApiFetchComposerActions
      */
     readonly list: CastComposerType
 
@@ -905,7 +905,7 @@ export interface CastApiFetchComposerActionListRequest {
      * 
      * 
      * @type {number}
-     * @memberof CastApiFetchComposerActionList
+     * @memberof CastApiFetchComposerActions
      */
     readonly limit?: number
 
@@ -914,7 +914,7 @@ export interface CastApiFetchComposerActionListRequest {
      * 
      * 
      * @type {string}
-     * @memberof CastApiFetchComposerActionList
+     * @memberof CastApiFetchComposerActions
      */
     readonly cursor?: string
 }
@@ -1178,17 +1178,17 @@ export class CastApi extends BaseAPI implements CastApiInterface {
     /**
      * Fetches all composer actions on Warpcast. You can filter by top or featured.
      * @summary Fetch composer actions
-     * @param {CastApiFetchComposerActionListRequest} requestParameters Request parameters.
+     * @param {CastApiFetchComposerActionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CastApi
      * @returns {Promise<CastComposerActionsListResponse>} A promise that resolves to a `CastComposerActionsListResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-action-list)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-composer-actions)
      * 
      */
-    public fetchComposerActionList(requestParameters: CastApiFetchComposerActionListRequest, options?: RawAxiosRequestConfig) {
-        return CastApiFp(this.configuration).fetchComposerActionList(requestParameters.list, requestParameters.limit, requestParameters.cursor, options).then((request) => request(this.axios, this.basePath));
+    public fetchComposerActions(requestParameters: CastApiFetchComposerActionsRequest, options?: RawAxiosRequestConfig) {
+        return CastApiFp(this.configuration).fetchComposerActions(requestParameters.list, requestParameters.limit, requestParameters.cursor, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

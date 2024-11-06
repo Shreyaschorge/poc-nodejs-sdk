@@ -218,12 +218,12 @@ export const FollowsApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          * @returns {Promise<FollowersResponse>} A promise that resolves to a `FollowersResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following-v2)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following)
          * 
          */
-        fetchUserFollowingV2: async (fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        fetchUserFollowing: async (fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fid' is not null or undefined
-            assertParamExists('fetchUserFollowingV2', 'fid', fid)
+            assertParamExists('fetchUserFollowing', 'fid', fid)
             const localVarPath = `/farcaster/following`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -350,13 +350,13 @@ export const FollowsApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          * @returns {Promise<FollowersResponse>} A promise that resolves to a `FollowersResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following-v2)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following)
          * 
          */
-        async fetchUserFollowingV2(fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FollowersResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchUserFollowingV2(fid, viewer_fid, sort_type, limit, cursor, options);
+        async fetchUserFollowing(fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FollowersResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchUserFollowing(fid, viewer_fid, sort_type, limit, cursor, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FollowsApi.fetchUserFollowingV2']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FollowsApi.fetchUserFollowing']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -414,16 +414,16 @@ export const FollowsApiFactory = function (configuration?: Configuration, basePa
         /**
          * Fetch a list of users followed by a user. Can optionally include a viewer_fid and sort_type.
          * @summary Followed by
-         * @param {FollowsApiFetchUserFollowingV2Request} requestParameters Request parameters.
+         * @param {FollowsApiFetchUserFollowingRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<FollowersResponse>} A promise that resolves to a `FollowersResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following-v2)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following)
          * 
          */
-        fetchUserFollowingV2(requestParameters: FollowsApiFetchUserFollowingV2Request, options?: RawAxiosRequestConfig): AxiosPromise<FollowersResponse> {
-            return localVarFp.fetchUserFollowingV2(requestParameters.fid, requestParameters.viewer_fid, requestParameters.sort_type, requestParameters.limit, requestParameters.cursor, options).then((request) => request(axios, basePath));
+        fetchUserFollowing(requestParameters: FollowsApiFetchUserFollowingRequest, options?: RawAxiosRequestConfig): AxiosPromise<FollowersResponse> {
+            return localVarFp.fetchUserFollowing(requestParameters.fid, requestParameters.viewer_fid, requestParameters.sort_type, requestParameters.limit, requestParameters.cursor, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -479,16 +479,16 @@ export interface FollowsApiInterface {
     /**
      * Fetch a list of users followed by a user. Can optionally include a viewer_fid and sort_type.
      * @summary Followed by
-     * @param {FollowsApiFetchUserFollowingV2Request} requestParameters Request parameters.
+     * @param {FollowsApiFetchUserFollowingRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FollowsApiInterface
      * @returns {Promise<FollowersResponse>} A promise that resolves to a `FollowersResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following-v2)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following)
      * 
      */
-    fetchUserFollowingV2(requestParameters: FollowsApiFetchUserFollowingV2Request, options?: RawAxiosRequestConfig): AxiosPromise<FollowersResponse>;
+    fetchUserFollowing(requestParameters: FollowsApiFetchUserFollowingRequest, options?: RawAxiosRequestConfig): AxiosPromise<FollowersResponse>;
 
 }
 
@@ -604,17 +604,17 @@ export interface FollowsApiFetchUserFollowersRequest {
 }
 
 /**
- * Request parameters for fetchUserFollowingV2 operation in FollowsApi.
+ * Request parameters for fetchUserFollowing operation in FollowsApi.
  * @export
- * @interface FollowsApiFetchUserFollowingV2Request
+ * @interface FollowsApiFetchUserFollowingRequest
  */
-export interface FollowsApiFetchUserFollowingV2Request {
+export interface FollowsApiFetchUserFollowingRequest {
     /**
      * FID of the user whose following you want to fetch.
      * 
      * 
      * @type {number}
-     * @memberof FollowsApiFetchUserFollowingV2
+     * @memberof FollowsApiFetchUserFollowing
      */
     readonly fid: number
 
@@ -623,7 +623,7 @@ export interface FollowsApiFetchUserFollowingV2Request {
      * 
      * 
      * @type {number}
-     * @memberof FollowsApiFetchUserFollowingV2
+     * @memberof FollowsApiFetchUserFollowing
      */
     readonly viewer_fid?: number
 
@@ -632,7 +632,7 @@ export interface FollowsApiFetchUserFollowingV2Request {
      * 
      * 
      * @type {FollowSortType}
-     * @memberof FollowsApiFetchUserFollowingV2
+     * @memberof FollowsApiFetchUserFollowing
      */
     readonly sort_type?: FollowSortType
 
@@ -641,7 +641,7 @@ export interface FollowsApiFetchUserFollowingV2Request {
      * 
      * 
      * @type {number}
-     * @memberof FollowsApiFetchUserFollowingV2
+     * @memberof FollowsApiFetchUserFollowing
      */
     readonly limit?: number
 
@@ -650,7 +650,7 @@ export interface FollowsApiFetchUserFollowingV2Request {
      * 
      * 
      * @type {string}
-     * @memberof FollowsApiFetchUserFollowingV2
+     * @memberof FollowsApiFetchUserFollowing
      */
     readonly cursor?: string
 }
@@ -713,17 +713,17 @@ export class FollowsApi extends BaseAPI implements FollowsApiInterface {
     /**
      * Fetch a list of users followed by a user. Can optionally include a viewer_fid and sort_type.
      * @summary Followed by
-     * @param {FollowsApiFetchUserFollowingV2Request} requestParameters Request parameters.
+     * @param {FollowsApiFetchUserFollowingRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof FollowsApi
      * @returns {Promise<FollowersResponse>} A promise that resolves to a `FollowersResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following-v2)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following)
      * 
      */
-    public fetchUserFollowingV2(requestParameters: FollowsApiFetchUserFollowingV2Request, options?: RawAxiosRequestConfig) {
-        return FollowsApiFp(this.configuration).fetchUserFollowingV2(requestParameters.fid, requestParameters.viewer_fid, requestParameters.sort_type, requestParameters.limit, requestParameters.cursor, options).then((request) => request(this.axios, this.basePath));
+    public fetchUserFollowing(requestParameters: FollowsApiFetchUserFollowingRequest, options?: RawAxiosRequestConfig) {
+        return FollowsApiFp(this.configuration).fetchUserFollowing(requestParameters.fid, requestParameters.viewer_fid, requestParameters.sort_type, requestParameters.limit, requestParameters.cursor, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -510,7 +510,7 @@ export interface ReactionApiFetchCastReactionsRequest {
     /**
      * Customize which reaction types the request should search for. This is a comma-separated string that can include the following values: \&#39;likes\&#39; and \&#39;recasts\&#39;. By default api returns both. To select multiple types, use a comma-separated list of these values. 
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof ReactionApiFetchCastReactions
      */

@@ -13,27 +13,24 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import type { NeynarFramePage } from './neynar-frame-page';
 
 /**
  * 
  * @export
- * @interface NeynarFrameCreationRequest
+ * @interface BlockReqBody
  */
-export interface NeynarFrameCreationRequest {
+export interface BlockReqBody {
     /**
-     * The name of the frame.
+     * UUID of the signer
      * @type {string}
-     * @memberof NeynarFrameCreationRequest
+     * @memberof BlockReqBody
      */
-    'name': string;
+    'signer_uuid': string;
     /**
-     * 
-     * @type {Array<NeynarFramePage>}
-     * @memberof NeynarFrameCreationRequest
+     * The unique identifier of a farcaster user (unsigned integer)
+     * @type {number}
+     * @memberof BlockReqBody
      */
-    'pages': Array<NeynarFramePage>;
+    'blocked_fid': number;
 }
 

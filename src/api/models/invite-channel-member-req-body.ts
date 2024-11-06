@@ -20,33 +20,33 @@ import type { ChannelMemberRole } from './channel-member-role';
 /**
  * 
  * @export
- * @interface RespondToChannelInviteRequest
+ * @interface InviteChannelMemberReqBody
  */
-export interface RespondToChannelInviteRequest {
+export interface InviteChannelMemberReqBody {
     /**
      * UUID of the signer
      * @type {string}
-     * @memberof RespondToChannelInviteRequest
+     * @memberof InviteChannelMemberReqBody
      */
     'signer_uuid': string;
     /**
      * The unique identifier of a farcaster channel
      * @type {string}
-     * @memberof RespondToChannelInviteRequest
+     * @memberof InviteChannelMemberReqBody
      */
     'channel_id': string;
     /**
+     * The unique identifier of a farcaster user (unsigned integer)
+     * @type {number}
+     * @memberof InviteChannelMemberReqBody
+     */
+    'fid': number;
+    /**
      * 
      * @type {ChannelMemberRole}
-     * @memberof RespondToChannelInviteRequest
+     * @memberof InviteChannelMemberReqBody
      */
     'role': ChannelMemberRole;
-    /**
-     * Accept or reject the invite
-     * @type {boolean}
-     * @memberof RespondToChannelInviteRequest
-     */
-    'accept': boolean;
 }
 
 

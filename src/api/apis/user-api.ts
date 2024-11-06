@@ -1529,7 +1529,7 @@ export interface UserApiFetchBulkUsersByEthereumAddressRequest {
     /**
      * Comma separated list of Ethereum addresses, up to 350 at a time
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof UserApiFetchBulkUsersByEthereumAddress
      */
@@ -1538,7 +1538,7 @@ export interface UserApiFetchBulkUsersByEthereumAddressRequest {
     /**
      * Customize which address types the request should search for. This is a comma-separated string that can include the following values: \&#39;custody_address\&#39; and \&#39;verified_address\&#39;. By default api returns both. To select multiple types, use a comma-separated list of these values. 
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof UserApiFetchBulkUsersByEthereumAddress
      */

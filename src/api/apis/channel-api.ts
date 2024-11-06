@@ -40,13 +40,15 @@ import type { ChannelType } from '../models';
 // @ts-ignore
 import type { ErrorRes } from '../models';
 // @ts-ignore
+import type { InviteChannelMemberReqBody } from '../models';
+// @ts-ignore
 import type { OperationResponse } from '../models';
 // @ts-ignore
 import type { RelevantFollowersResponse } from '../models';
 // @ts-ignore
-import type { RemoveChannelMemberRequest } from '../models';
+import type { RemoveChannelMemberReqBody } from '../models';
 // @ts-ignore
-import type { RespondToChannelInviteRequest } from '../models';
+import type { RespondChannelInviteReqBody } from '../models';
 // @ts-ignore
 import type { TrendingChannelResponse } from '../models';
 // @ts-ignore
@@ -59,82 +61,6 @@ import type { UsersResponse } from '../models';
  */
 export const ChannelApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * Returns a list of users who are active in a given channel, ordered by ascending FIDs
-         * @summary Fetch users who are active in a channel
-         * @param {string} id Channel ID for the channel being queried 
-         * @param {boolean} has_root_cast_authors Include users who posted the root cast in the channel 
-         * @param {boolean} [has_cast_likers] Include users who liked a cast in the channel 
-         * @param {boolean} [has_cast_recasters] Include users who recasted a cast in the channel 
-         * @param {boolean} [has_reply_authors] Include users who replied to a cast in the channel 
-         * @param {string} [cursor] Pagination cursor. 
-         * @param {number} [limit] Number of results to fetch  (Default: 25, Maximum: 100)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object
-         * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-active-users-in-single-channel)
-         * 
-         */
-        fetchActiveUsersInSingleChannel: async (id: string, has_root_cast_authors: boolean, has_cast_likers?: boolean, has_cast_recasters?: boolean, has_reply_authors?: boolean, cursor?: string, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('fetchActiveUsersInSingleChannel', 'id', id)
-            // verify required parameter 'has_root_cast_authors' is not null or undefined
-            assertParamExists('fetchActiveUsersInSingleChannel', 'has_root_cast_authors', has_root_cast_authors)
-            const localVarPath = `/farcaster/channel/users`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication ApiKeyAuth required
-            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
-
-            if (id !== undefined) {
-                localVarQueryParameter['id'] = id;
-            }
-
-            if (has_root_cast_authors !== undefined) {
-                localVarQueryParameter['has_root_cast_authors'] = has_root_cast_authors;
-            }
-
-            if (has_cast_likers !== undefined) {
-                localVarQueryParameter['has_cast_likers'] = has_cast_likers;
-            }
-
-            if (has_cast_recasters !== undefined) {
-                localVarQueryParameter['has_cast_recasters'] = has_cast_recasters;
-            }
-
-            if (has_reply_authors !== undefined) {
-                localVarQueryParameter['has_reply_authors'] = has_reply_authors;
-            }
-
-            if (cursor !== undefined) {
-                localVarQueryParameter['cursor'] = cursor;
-            }
-
-            if (limit !== undefined) {
-                localVarQueryParameter['limit'] = limit;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * Returns a list of all channels with their details
          * @summary Fetch all channels with their details
@@ -722,17 +648,17 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Invite a user to a channel
          * @summary Invite
-         * @param {RemoveChannelMemberRequest} remove_channel_member_request  
+         * @param {InviteChannelMemberReqBody} invite_channel_member_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-member-to-channel)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-channel-member)
          * 
          */
-        inviteMemberToChannel: async (remove_channel_member_request: RemoveChannelMemberRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'remove_channel_member_request' is not null or undefined
-            assertParamExists('inviteMemberToChannel', 'remove_channel_member_request', remove_channel_member_request)
+        inviteChannelMember: async (invite_channel_member_req_body: InviteChannelMemberReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'invite_channel_member_req_body' is not null or undefined
+            assertParamExists('inviteChannelMember', 'invite_channel_member_req_body', invite_channel_member_req_body)
             const localVarPath = `/farcaster/channel/member/invite`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -755,7 +681,7 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(remove_channel_member_request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(invite_channel_member_req_body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -819,7 +745,7 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Remove a user from a channel or a user\'s invite to a channel role
          * @summary Remove user
-         * @param {RemoveChannelMemberRequest} remove_channel_member_request  
+         * @param {RemoveChannelMemberReqBody} remove_channel_member_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
@@ -827,9 +753,9 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/remove-channel-member)
          * 
          */
-        removeChannelMember: async (remove_channel_member_request: RemoveChannelMemberRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'remove_channel_member_request' is not null or undefined
-            assertParamExists('removeChannelMember', 'remove_channel_member_request', remove_channel_member_request)
+        removeChannelMember: async (remove_channel_member_req_body: RemoveChannelMemberReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'remove_channel_member_req_body' is not null or undefined
+            assertParamExists('removeChannelMember', 'remove_channel_member_req_body', remove_channel_member_req_body)
             const localVarPath = `/farcaster/channel/member`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -852,7 +778,7 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(remove_channel_member_request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(remove_channel_member_req_body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -862,17 +788,17 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Accept or reject a channel invite
          * @summary Accept or reject an invite
-         * @param {RespondToChannelInviteRequest} respond_to_channel_invite_request  
+         * @param {RespondChannelInviteReqBody} respond_channel_invite_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-to-channel-invite)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-channel-invite)
          * 
          */
-        respondToChannelInvite: async (respond_to_channel_invite_request: RespondToChannelInviteRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'respond_to_channel_invite_request' is not null or undefined
-            assertParamExists('respondToChannelInvite', 'respond_to_channel_invite_request', respond_to_channel_invite_request)
+        respondChannelInvite: async (respond_channel_invite_req_body: RespondChannelInviteReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'respond_channel_invite_req_body' is not null or undefined
+            assertParamExists('respondChannelInvite', 'respond_channel_invite_req_body', respond_channel_invite_req_body)
             const localVarPath = `/farcaster/channel/member/invite`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -895,7 +821,7 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(respond_to_channel_invite_request, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(respond_channel_invite_req_body, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1009,29 +935,6 @@ export const ChannelApiAxiosParamCreator = function (configuration?: Configurati
 export const ChannelApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ChannelApiAxiosParamCreator(configuration)
     return {
-        /**
-         * Returns a list of users who are active in a given channel, ordered by ascending FIDs
-         * @summary Fetch users who are active in a channel
-         * @param {string} id Channel ID for the channel being queried 
-         * @param {boolean} has_root_cast_authors Include users who posted the root cast in the channel 
-         * @param {boolean} [has_cast_likers] Include users who liked a cast in the channel 
-         * @param {boolean} [has_cast_recasters] Include users who recasted a cast in the channel 
-         * @param {boolean} [has_reply_authors] Include users who replied to a cast in the channel 
-         * @param {string} [cursor] Pagination cursor. 
-         * @param {number} [limit] Number of results to fetch  (Default: 25, Maximum: 100)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object
-         * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-active-users-in-single-channel)
-         * 
-         */
-        async fetchActiveUsersInSingleChannel(id: string, has_root_cast_authors: boolean, has_cast_likers?: boolean, has_cast_recasters?: boolean, has_reply_authors?: boolean, cursor?: string, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchActiveUsersInSingleChannel(id, has_root_cast_authors, has_cast_likers, has_cast_recasters, has_reply_authors, cursor, limit, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ChannelApi.fetchActiveUsersInSingleChannel']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
         /**
          * Returns a list of all channels with their details
          * @summary Fetch all channels with their details
@@ -1243,18 +1146,18 @@ export const ChannelApiFp = function(configuration?: Configuration) {
         /**
          * Invite a user to a channel
          * @summary Invite
-         * @param {RemoveChannelMemberRequest} remove_channel_member_request  
+         * @param {InviteChannelMemberReqBody} invite_channel_member_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-member-to-channel)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-channel-member)
          * 
          */
-        async inviteMemberToChannel(remove_channel_member_request: RemoveChannelMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OperationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.inviteMemberToChannel(remove_channel_member_request, options);
+        async inviteChannelMember(invite_channel_member_req_body: InviteChannelMemberReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OperationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.inviteChannelMember(invite_channel_member_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ChannelApi.inviteMemberToChannel']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ChannelApi.inviteChannelMember']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1279,7 +1182,7 @@ export const ChannelApiFp = function(configuration?: Configuration) {
         /**
          * Remove a user from a channel or a user\'s invite to a channel role
          * @summary Remove user
-         * @param {RemoveChannelMemberRequest} remove_channel_member_request  
+         * @param {RemoveChannelMemberReqBody} remove_channel_member_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
@@ -1287,8 +1190,8 @@ export const ChannelApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/remove-channel-member)
          * 
          */
-        async removeChannelMember(remove_channel_member_request: RemoveChannelMemberRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OperationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.removeChannelMember(remove_channel_member_request, options);
+        async removeChannelMember(remove_channel_member_req_body: RemoveChannelMemberReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OperationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeChannelMember(remove_channel_member_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ChannelApi.removeChannelMember']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1296,18 +1199,18 @@ export const ChannelApiFp = function(configuration?: Configuration) {
         /**
          * Accept or reject a channel invite
          * @summary Accept or reject an invite
-         * @param {RespondToChannelInviteRequest} respond_to_channel_invite_request  
+         * @param {RespondChannelInviteReqBody} respond_channel_invite_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-to-channel-invite)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-channel-invite)
          * 
          */
-        async respondToChannelInvite(respond_to_channel_invite_request: RespondToChannelInviteRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OperationResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.respondToChannelInvite(respond_to_channel_invite_request, options);
+        async respondChannelInvite(respond_channel_invite_req_body: RespondChannelInviteReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OperationResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.respondChannelInvite(respond_channel_invite_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ChannelApi.respondToChannelInvite']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ChannelApi.respondChannelInvite']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -1356,20 +1259,6 @@ export const ChannelApiFp = function(configuration?: Configuration) {
 export const ChannelApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ChannelApiFp(configuration)
     return {
-        /**
-         * Returns a list of users who are active in a given channel, ordered by ascending FIDs
-         * @summary Fetch users who are active in a channel
-         * @param {ChannelApiFetchActiveUsersInSingleChannelRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object
-         * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-active-users-in-single-channel)
-         * 
-         */
-        fetchActiveUsersInSingleChannel(requestParameters: ChannelApiFetchActiveUsersInSingleChannelRequest, options?: RawAxiosRequestConfig): AxiosPromise<UsersResponse> {
-            return localVarFp.fetchActiveUsersInSingleChannel(requestParameters.id, requestParameters.has_root_cast_authors, requestParameters.has_cast_likers, requestParameters.has_cast_recasters, requestParameters.has_reply_authors, requestParameters.cursor, requestParameters.limit, options).then((request) => request(axios, basePath));
-        },
         /**
          * Returns a list of all channels with their details
          * @summary Fetch all channels with their details
@@ -1527,16 +1416,16 @@ export const ChannelApiFactory = function (configuration?: Configuration, basePa
         /**
          * Invite a user to a channel
          * @summary Invite
-         * @param {ChannelApiInviteMemberToChannelRequest} requestParameters Request parameters.
+         * @param {ChannelApiInviteChannelMemberRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-member-to-channel)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-channel-member)
          * 
          */
-        inviteMemberToChannel(requestParameters: ChannelApiInviteMemberToChannelRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse> {
-            return localVarFp.inviteMemberToChannel(requestParameters.remove_channel_member_request, options).then((request) => request(axios, basePath));
+        inviteChannelMember(requestParameters: ChannelApiInviteChannelMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse> {
+            return localVarFp.inviteChannelMember(requestParameters.invite_channel_member_req_body, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns details of a channel
@@ -1564,21 +1453,21 @@ export const ChannelApiFactory = function (configuration?: Configuration, basePa
          * 
          */
         removeChannelMember(requestParameters: ChannelApiRemoveChannelMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse> {
-            return localVarFp.removeChannelMember(requestParameters.remove_channel_member_request, options).then((request) => request(axios, basePath));
+            return localVarFp.removeChannelMember(requestParameters.remove_channel_member_req_body, options).then((request) => request(axios, basePath));
         },
         /**
          * Accept or reject a channel invite
          * @summary Accept or reject an invite
-         * @param {ChannelApiRespondToChannelInviteRequest} requestParameters Request parameters.
+         * @param {ChannelApiRespondChannelInviteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
          * 
-         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-to-channel-invite)
+         * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-channel-invite)
          * 
          */
-        respondToChannelInvite(requestParameters: ChannelApiRespondToChannelInviteRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse> {
-            return localVarFp.respondToChannelInvite(requestParameters.respond_to_channel_invite_request, options).then((request) => request(axios, basePath));
+        respondChannelInvite(requestParameters: ChannelApiRespondChannelInviteRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse> {
+            return localVarFp.respondChannelInvite(requestParameters.respond_channel_invite_req_body, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of channels based on ID or name
@@ -1617,20 +1506,6 @@ export const ChannelApiFactory = function (configuration?: Configuration, basePa
  * @interface ChannelApi
  */
 export interface ChannelApiInterface {
-    /**
-     * Returns a list of users who are active in a given channel, ordered by ascending FIDs
-     * @summary Fetch users who are active in a channel
-     * @param {ChannelApiFetchActiveUsersInSingleChannelRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ChannelApiInterface
-     * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object
-     * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-active-users-in-single-channel)
-     * 
-     */
-    fetchActiveUsersInSingleChannel(requestParameters: ChannelApiFetchActiveUsersInSingleChannelRequest, options?: RawAxiosRequestConfig): AxiosPromise<UsersResponse>;
-
     /**
      * Returns a list of all channels with their details
      * @summary Fetch all channels with their details
@@ -1788,16 +1663,16 @@ export interface ChannelApiInterface {
     /**
      * Invite a user to a channel
      * @summary Invite
-     * @param {ChannelApiInviteMemberToChannelRequest} requestParameters Request parameters.
+     * @param {ChannelApiInviteChannelMemberRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChannelApiInterface
      * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-member-to-channel)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-channel-member)
      * 
      */
-    inviteMemberToChannel(requestParameters: ChannelApiInviteMemberToChannelRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse>;
+    inviteChannelMember(requestParameters: ChannelApiInviteChannelMemberRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse>;
 
     /**
      * Returns details of a channel
@@ -1830,16 +1705,16 @@ export interface ChannelApiInterface {
     /**
      * Accept or reject a channel invite
      * @summary Accept or reject an invite
-     * @param {ChannelApiRespondToChannelInviteRequest} requestParameters Request parameters.
+     * @param {ChannelApiRespondChannelInviteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChannelApiInterface
      * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-to-channel-invite)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-channel-invite)
      * 
      */
-    respondToChannelInvite(requestParameters: ChannelApiRespondToChannelInviteRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse>;
+    respondChannelInvite(requestParameters: ChannelApiRespondChannelInviteRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse>;
 
     /**
      * Returns a list of channels based on ID or name
@@ -1869,76 +1744,6 @@ export interface ChannelApiInterface {
      */
     unfollowChannel(requestParameters: ChannelApiUnfollowChannelRequest, options?: RawAxiosRequestConfig): AxiosPromise<OperationResponse>;
 
-}
-
-/**
- * Request parameters for fetchActiveUsersInSingleChannel operation in ChannelApi.
- * @export
- * @interface ChannelApiFetchActiveUsersInSingleChannelRequest
- */
-export interface ChannelApiFetchActiveUsersInSingleChannelRequest {
-    /**
-     * Channel ID for the channel being queried
-     * 
-     * 
-     * @type {string}
-     * @memberof ChannelApiFetchActiveUsersInSingleChannel
-     */
-    readonly id: string
-
-    /**
-     * Include users who posted the root cast in the channel
-     * 
-     * 
-     * @type {boolean}
-     * @memberof ChannelApiFetchActiveUsersInSingleChannel
-     */
-    readonly has_root_cast_authors: boolean
-
-    /**
-     * Include users who liked a cast in the channel
-     * 
-     * 
-     * @type {boolean}
-     * @memberof ChannelApiFetchActiveUsersInSingleChannel
-     */
-    readonly has_cast_likers?: boolean
-
-    /**
-     * Include users who recasted a cast in the channel
-     * 
-     * 
-     * @type {boolean}
-     * @memberof ChannelApiFetchActiveUsersInSingleChannel
-     */
-    readonly has_cast_recasters?: boolean
-
-    /**
-     * Include users who replied to a cast in the channel
-     * 
-     * 
-     * @type {boolean}
-     * @memberof ChannelApiFetchActiveUsersInSingleChannel
-     */
-    readonly has_reply_authors?: boolean
-
-    /**
-     * Pagination cursor.
-     * 
-     * 
-     * @type {string}
-     * @memberof ChannelApiFetchActiveUsersInSingleChannel
-     */
-    readonly cursor?: string
-
-    /**
-     * Number of results to fetch (Default: 25, Maximum: 100)
-     * 
-     * 
-     * @type {number}
-     * @memberof ChannelApiFetchActiveUsersInSingleChannel
-     */
-    readonly limit?: number
 }
 
 /**
@@ -1975,7 +1780,7 @@ export interface ChannelApiFetchBulkChannelsRequest {
     /**
      * Comma separated list of channel IDs or parent_urls, up to 100 at a time
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof ChannelApiFetchBulkChannels
      */
@@ -2307,19 +2112,19 @@ export interface ChannelApiFollowChannelRequest {
 }
 
 /**
- * Request parameters for inviteMemberToChannel operation in ChannelApi.
+ * Request parameters for inviteChannelMember operation in ChannelApi.
  * @export
- * @interface ChannelApiInviteMemberToChannelRequest
+ * @interface ChannelApiInviteChannelMemberRequest
  */
-export interface ChannelApiInviteMemberToChannelRequest {
+export interface ChannelApiInviteChannelMemberRequest {
     /**
      * 
      * 
      * 
-     * @type {RemoveChannelMemberRequest}
-     * @memberof ChannelApiInviteMemberToChannel
+     * @type {InviteChannelMemberReqBody}
+     * @memberof ChannelApiInviteChannelMember
      */
-    readonly remove_channel_member_request: RemoveChannelMemberRequest
+    readonly invite_channel_member_req_body: InviteChannelMemberReqBody
 }
 
 /**
@@ -2366,26 +2171,26 @@ export interface ChannelApiRemoveChannelMemberRequest {
      * 
      * 
      * 
-     * @type {RemoveChannelMemberRequest}
+     * @type {RemoveChannelMemberReqBody}
      * @memberof ChannelApiRemoveChannelMember
      */
-    readonly remove_channel_member_request: RemoveChannelMemberRequest
+    readonly remove_channel_member_req_body: RemoveChannelMemberReqBody
 }
 
 /**
- * Request parameters for respondToChannelInvite operation in ChannelApi.
+ * Request parameters for respondChannelInvite operation in ChannelApi.
  * @export
- * @interface ChannelApiRespondToChannelInviteRequest
+ * @interface ChannelApiRespondChannelInviteRequest
  */
-export interface ChannelApiRespondToChannelInviteRequest {
+export interface ChannelApiRespondChannelInviteRequest {
     /**
      * 
      * 
      * 
-     * @type {RespondToChannelInviteRequest}
-     * @memberof ChannelApiRespondToChannelInvite
+     * @type {RespondChannelInviteReqBody}
+     * @memberof ChannelApiRespondChannelInvite
      */
-    readonly respond_to_channel_invite_request: RespondToChannelInviteRequest
+    readonly respond_channel_invite_req_body: RespondChannelInviteReqBody
 }
 
 /**
@@ -2445,22 +2250,6 @@ export interface ChannelApiUnfollowChannelRequest {
  * @extends {BaseAPI}
  */
 export class ChannelApi extends BaseAPI implements ChannelApiInterface {
-    /**
-     * Returns a list of users who are active in a given channel, ordered by ascending FIDs
-     * @summary Fetch users who are active in a channel
-     * @param {ChannelApiFetchActiveUsersInSingleChannelRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ChannelApi
-     * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object
-     * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-active-users-in-single-channel)
-     * 
-     */
-    public fetchActiveUsersInSingleChannel(requestParameters: ChannelApiFetchActiveUsersInSingleChannelRequest, options?: RawAxiosRequestConfig) {
-        return ChannelApiFp(this.configuration).fetchActiveUsersInSingleChannel(requestParameters.id, requestParameters.has_root_cast_authors, requestParameters.has_cast_likers, requestParameters.has_cast_recasters, requestParameters.has_reply_authors, requestParameters.cursor, requestParameters.limit, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * Returns a list of all channels with their details
      * @summary Fetch all channels with their details
@@ -2640,17 +2429,17 @@ export class ChannelApi extends BaseAPI implements ChannelApiInterface {
     /**
      * Invite a user to a channel
      * @summary Invite
-     * @param {ChannelApiInviteMemberToChannelRequest} requestParameters Request parameters.
+     * @param {ChannelApiInviteChannelMemberRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChannelApi
      * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-member-to-channel)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/invite-channel-member)
      * 
      */
-    public inviteMemberToChannel(requestParameters: ChannelApiInviteMemberToChannelRequest, options?: RawAxiosRequestConfig) {
-        return ChannelApiFp(this.configuration).inviteMemberToChannel(requestParameters.remove_channel_member_request, options).then((request) => request(this.axios, this.basePath));
+    public inviteChannelMember(requestParameters: ChannelApiInviteChannelMemberRequest, options?: RawAxiosRequestConfig) {
+        return ChannelApiFp(this.configuration).inviteChannelMember(requestParameters.invite_channel_member_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -2682,23 +2471,23 @@ export class ChannelApi extends BaseAPI implements ChannelApiInterface {
      * 
      */
     public removeChannelMember(requestParameters: ChannelApiRemoveChannelMemberRequest, options?: RawAxiosRequestConfig) {
-        return ChannelApiFp(this.configuration).removeChannelMember(requestParameters.remove_channel_member_request, options).then((request) => request(this.axios, this.basePath));
+        return ChannelApiFp(this.configuration).removeChannelMember(requestParameters.remove_channel_member_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Accept or reject a channel invite
      * @summary Accept or reject an invite
-     * @param {ChannelApiRespondToChannelInviteRequest} requestParameters Request parameters.
+     * @param {ChannelApiRespondChannelInviteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ChannelApi
      * @returns {Promise<OperationResponse>} A promise that resolves to a `OperationResponse` object
      * 
-     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-to-channel-invite)
+     * For more information, refer to the [API documentation](https://docs.neynar.com/reference/respond-channel-invite)
      * 
      */
-    public respondToChannelInvite(requestParameters: ChannelApiRespondToChannelInviteRequest, options?: RawAxiosRequestConfig) {
-        return ChannelApiFp(this.configuration).respondToChannelInvite(requestParameters.respond_to_channel_invite_request, options).then((request) => request(this.axios, this.basePath));
+    public respondChannelInvite(requestParameters: ChannelApiRespondChannelInviteRequest, options?: RawAxiosRequestConfig) {
+        return ChannelApiFp(this.configuration).respondChannelInvite(requestParameters.respond_channel_invite_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

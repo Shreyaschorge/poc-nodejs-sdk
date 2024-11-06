@@ -7,16 +7,21 @@ const fids = [4, 6, 1, 191];
 // const viewer_fid = 8;
 
 const identifier = "https://warpcast.com/harper.eth/0x3c974d78";
-const type = CastParamType.Url;
-const viewer_fid = 2345;
-
+// const type = CastParamType.Url;
+// const viewer_fid = 2345;
 
 const signer_uuid = "c06aa219-65ed-477f-b461-3e2fd70a36a7";
-const text = 'Hello, World! test sdk v2'
-const embeds = [{
-  url: 'https://warpcast.com/harper.eth/0x3c974d78',
-}]
+const text = "Hello, World! test sdk v2";
+const embeds = [
+  {
+    url: "https://warpcast.com/harper.eth/0x3c974d78",
+  },
+];
 
-client.publishCast({signer_uuid, text, embeds}).then(response => {
+const fid = 19960
+const type = ['likes', 'replies']
+const priority_mode = false
+
+client.fetchAllNotifications({fid, type, priority_mode}).then(response => {
   console.log('response:', response);
 });

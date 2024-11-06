@@ -26,8 +26,6 @@ import type { ErrorRes } from '../models';
 // @ts-ignore
 import type { MarkNotificationsAsSeenReqBody } from '../models';
 // @ts-ignore
-import type { NotificationType } from '../models';
-// @ts-ignore
 import type { NotificationsResponse } from '../models';
 // @ts-ignore
 import type { OperationResponse } from '../models';
@@ -41,7 +39,7 @@ export const NotificationsApiAxiosParamCreator = function (configuration?: Confi
          * Returns a list of notifications for a specific FID.
          * @summary For user
          * @param {number} fid FID of the user you you want to fetch notifications for. The response will respect this user\&#39;s mutes and blocks. 
-         * @param {NotificationType} [type] Notification type to fetch. 
+         * @param {string} [type] Notification type to fetch. Comma separated values of follows, recasts, likes, mentions, replies. 
          * @param {boolean} [priority_mode] When true, only returns notifications from power badge users and users that the viewer follows (if viewer_fid is provided). 
          * @param {string} [cursor] Pagination cursor. 
          * @param {*} [options] Override http request option.
@@ -51,7 +49,7 @@ export const NotificationsApiAxiosParamCreator = function (configuration?: Confi
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-all-notifications)
          * 
          */
-        fetchAllNotifications: async (fid: number, type?: NotificationType, priority_mode?: boolean, cursor?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        fetchAllNotifications: async (fid: number, type?: string, priority_mode?: boolean, cursor?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'fid' is not null or undefined
             assertParamExists('fetchAllNotifications', 'fid', fid)
             const localVarPath = `/farcaster/notifications`;
@@ -275,7 +273,7 @@ export const NotificationsApiFp = function(configuration?: Configuration) {
          * Returns a list of notifications for a specific FID.
          * @summary For user
          * @param {number} fid FID of the user you you want to fetch notifications for. The response will respect this user\&#39;s mutes and blocks. 
-         * @param {NotificationType} [type] Notification type to fetch. 
+         * @param {string} [type] Notification type to fetch. Comma separated values of follows, recasts, likes, mentions, replies. 
          * @param {boolean} [priority_mode] When true, only returns notifications from power badge users and users that the viewer follows (if viewer_fid is provided). 
          * @param {string} [cursor] Pagination cursor. 
          * @param {*} [options] Override http request option.
@@ -285,7 +283,7 @@ export const NotificationsApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-all-notifications)
          * 
          */
-        async fetchAllNotifications(fid: number, type?: NotificationType, priority_mode?: boolean, cursor?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotificationsResponse>> {
+        async fetchAllNotifications(fid: number, type?: string, priority_mode?: boolean, cursor?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NotificationsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.fetchAllNotifications(fid, type, priority_mode, cursor, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['NotificationsApi.fetchAllNotifications']?.[localVarOperationServerIndex]?.url;
@@ -497,13 +495,13 @@ export interface NotificationsApiFetchAllNotificationsRequest {
     readonly fid: number
 
     /**
-     * Notification type to fetch.
+     * Notification type to fetch. Comma separated values of follows, recasts, likes, mentions, replies.
      * 
-     * 
-     * @type {NotificationType}
+     * @commaSeparated
+     * @type {string}
      * @memberof NotificationsApiFetchAllNotifications
      */
-    readonly type?: NotificationType
+    readonly type?: string
 
     /**
      * When true, only returns notifications from power badge users and users that the viewer follows (if viewer_fid is provided).
@@ -542,7 +540,7 @@ export interface NotificationsApiFetchChannelNotificationsForUserRequest {
     /**
      * Comma separated channel_ids (find list of all channels here - https://docs.neynar.com/reference/list-all-channels)
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof NotificationsApiFetchChannelNotificationsForUser
      */
@@ -585,7 +583,7 @@ export interface NotificationsApiFetchNotificationsByParentUrlForUserRequest {
     /**
      * Comma separated parent_urls
      * 
-     * 
+     * @commaSeparated
      * @type {string}
      * @memberof NotificationsApiFetchNotificationsByParentUrlForUser
      */
