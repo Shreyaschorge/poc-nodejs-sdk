@@ -9,6 +9,7 @@
   "additionalProperties": {
     "useSingleRequestParameter": true,
     "withInterfaces": true,
+    "npmName": "@neynar/typescript-sdk",
     "supportsES6": true,
     "paramNaming": "snake_case"
   }
