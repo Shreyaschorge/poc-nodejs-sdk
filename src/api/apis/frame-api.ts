@@ -156,7 +156,7 @@ export const FrameApiAxiosParamCreator = function (configuration?: Configuration
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-neynar-frames)
          * 
          */
-        fetchNeynarFrames: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        fetchNeynarFramesss: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/farcaster/frame/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -617,10 +617,10 @@ export const FrameApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-neynar-frames)
          * 
          */
-        async fetchNeynarFrames(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NeynarFrame>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchNeynarFrames(options);
+        async fetchNeynarFramesss(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<NeynarFrame>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchNeynarFramesss(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['FrameApi.fetchNeynarFrames']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['FrameApi.fetchNeynarFramesss']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -812,8 +812,8 @@ export const FrameApiFactory = function (configuration?: Configuration, basePath
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-neynar-frames)
          * 
          */
-        fetchNeynarFrames(options?: RawAxiosRequestConfig): AxiosPromise<Array<NeynarFrame>> {
-            return localVarFp.fetchNeynarFrames(options).then((request) => request(axios, basePath));
+        fetchNeynarFramesss(options?: RawAxiosRequestConfig): AxiosPromise<Array<NeynarFrame>> {
+            return localVarFp.fetchNeynarFramesss(options).then((request) => request(axios, basePath));
         },
         /**
          * Fetch analytics for total-interactors, interactors, nteractions-per-cast and input-text.
@@ -974,7 +974,7 @@ export interface FrameApiInterface {
      * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-neynar-frames)
      * 
      */
-    fetchNeynarFrames(options?: RawAxiosRequestConfig): AxiosPromise<Array<NeynarFrame>>;
+    fetchNeynarFramesss(options?: RawAxiosRequestConfig): AxiosPromise<Array<NeynarFrame>>;
 
     /**
      * Fetch analytics for total-interactors, interactors, nteractions-per-cast and input-text.
@@ -1337,8 +1337,8 @@ export class FrameApi extends BaseAPI implements FrameApiInterface {
      * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-neynar-frames)
      * 
      */
-    public fetchNeynarFrames(options?: RawAxiosRequestConfig) {
-        return FrameApiFp(this.configuration).fetchNeynarFrames(options).then((request) => request(this.axios, this.basePath));
+    public fetchNeynarFramesss(options?: RawAxiosRequestConfig) {
+        return FrameApiFp(this.configuration).fetchNeynarFramesss(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

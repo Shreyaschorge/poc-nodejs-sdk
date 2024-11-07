@@ -306,6 +306,7 @@ export const SignerApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * Registers an signed key and returns the developer managed signer status with an approval url.
          * @summary Register Signed Key
+         * @param {string} x_experiments_enabled Enable experimental features 
          * @param {RegisterDeveloperManagedSignedKeyReqBody} register_developer_managed_signed_key_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -314,7 +315,9 @@ export const SignerApiAxiosParamCreator = function (configuration?: Configuratio
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/register-signed-key-for-developer-managed-signer)
          * 
          */
-        registerSignedKeyForDeveloperManagedSigner: async (register_developer_managed_signed_key_req_body: RegisterDeveloperManagedSignedKeyReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        registerSignedKeyForDeveloperManagedSigner: async (x_experiments_enabled: string, register_developer_managed_signed_key_req_body: RegisterDeveloperManagedSignedKeyReqBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'x_experiments_enabled' is not null or undefined
+            assertParamExists('registerSignedKeyForDeveloperManagedSigner', 'x_experiments_enabled', x_experiments_enabled)
             // verify required parameter 'register_developer_managed_signed_key_req_body' is not null or undefined
             assertParamExists('registerSignedKeyForDeveloperManagedSigner', 'register_developer_managed_signed_key_req_body', register_developer_managed_signed_key_req_body)
             const localVarPath = `/farcaster/signer/developer_managed/signed_key`;
@@ -331,6 +334,10 @@ export const SignerApiAxiosParamCreator = function (configuration?: Configuratio
 
             // authentication ApiKeyAuth required
             await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            if (x_experiments_enabled != null) {
+                localVarHeaderParameter['x-experiments-enabled'] = String(x_experiments_enabled);
+            }
 
 
     
@@ -461,6 +468,7 @@ export const SignerApiFp = function(configuration?: Configuration) {
         /**
          * Registers an signed key and returns the developer managed signer status with an approval url.
          * @summary Register Signed Key
+         * @param {string} x_experiments_enabled Enable experimental features 
          * @param {RegisterDeveloperManagedSignedKeyReqBody} register_developer_managed_signed_key_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -469,8 +477,8 @@ export const SignerApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/register-signed-key-for-developer-managed-signer)
          * 
          */
-        async registerSignedKeyForDeveloperManagedSigner(register_developer_managed_signed_key_req_body: RegisterDeveloperManagedSignedKeyReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeveloperManagedSigner>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.registerSignedKeyForDeveloperManagedSigner(register_developer_managed_signed_key_req_body, options);
+        async registerSignedKeyForDeveloperManagedSigner(x_experiments_enabled: string, register_developer_managed_signed_key_req_body: RegisterDeveloperManagedSignedKeyReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeveloperManagedSigner>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.registerSignedKeyForDeveloperManagedSigner(x_experiments_enabled, register_developer_managed_signed_key_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SignerApi.registerSignedKeyForDeveloperManagedSigner']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -580,7 +588,7 @@ export const SignerApiFactory = function (configuration?: Configuration, basePat
          * 
          */
         registerSignedKeyForDeveloperManagedSigner(requestParameters: SignerApiRegisterSignedKeyForDeveloperManagedSignerRequest, options?: RawAxiosRequestConfig): AxiosPromise<DeveloperManagedSigner> {
-            return localVarFp.registerSignedKeyForDeveloperManagedSigner(requestParameters.register_developer_managed_signed_key_req_body, options).then((request) => request(axios, basePath));
+            return localVarFp.registerSignedKeyForDeveloperManagedSigner(requestParameters.x_experiments_enabled, requestParameters.register_developer_managed_signed_key_req_body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -786,6 +794,15 @@ export interface SignerApiRegisterSignedKeyRequest {
  */
 export interface SignerApiRegisterSignedKeyForDeveloperManagedSignerRequest {
     /**
+     * Enable experimental features
+     * 
+     * 
+     * @type {string}
+     * @memberof SignerApiRegisterSignedKeyForDeveloperManagedSigner
+     */
+    readonly x_experiments_enabled: string
+
+    /**
      * 
      * 
      * 
@@ -910,7 +927,7 @@ export class SignerApi extends BaseAPI implements SignerApiInterface {
      * 
      */
     public registerSignedKeyForDeveloperManagedSigner(requestParameters: SignerApiRegisterSignedKeyForDeveloperManagedSignerRequest, options?: RawAxiosRequestConfig) {
-        return SignerApiFp(this.configuration).registerSignedKeyForDeveloperManagedSigner(requestParameters.register_developer_managed_signed_key_req_body, options).then((request) => request(this.axios, this.basePath));
+        return SignerApiFp(this.configuration).registerSignedKeyForDeveloperManagedSigner(requestParameters.x_experiments_enabled, requestParameters.register_developer_managed_signed_key_req_body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
