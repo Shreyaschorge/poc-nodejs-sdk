@@ -1,6 +1,7 @@
 .gitignore
 .npmignore
 .openapi-generator-ignore
+README.md
 api.ts
 apis/action-api.ts
 apis/ban-api.ts
@@ -276,3 +277,6 @@ models/webhook-subscription.ts
 models/webhook.ts
 models/zod-error-errors-inner.ts
 models/zod-error.ts
+package.json
+tsconfig.esm.json
+tsconfig.json

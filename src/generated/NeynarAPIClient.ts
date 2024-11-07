@@ -1801,16 +1801,16 @@ public async fetchFrameMetaTagsFromUrl(params: { url: string }, options?: RawAxi
  *
  * @example
  *
- * client.fetchNeynarFrames().then(response => {
+ * client.fetchNeynarFramesss().then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-neynar-frames)
  *
  */
-public async fetchNeynarFrames(options?: RawAxiosRequestConfig): Promise<Array<NeynarFrame>> {
+public async fetchNeynarFramesss(options?: RawAxiosRequestConfig): Promise<Array<NeynarFrame>> {
   
-  const response = await this.apis.frameApi.fetchNeynarFrames(options);
+  const response = await this.apis.frameApi.fetchNeynarFramesss(options);
   return response.data;
 }
 
