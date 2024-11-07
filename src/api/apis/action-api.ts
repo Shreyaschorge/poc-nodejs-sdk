@@ -35,7 +35,7 @@ export const ActionApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {FarcasterActionReqBody} farcaster_action_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * @returns {Promise<{ [key: string]: any | undefined; }>} A promise that resolves to a `{ [key: string]: any | undefined; }` object
+         * @returns {Promise<{ [key: string]: any; }>} A promise that resolves to a `{ [key: string]: any; }` object
          * 
          * For more information, refer to the [API documentation](https://docs.neynar.com/docs/farcaster-actions-spec)
          * 
@@ -88,12 +88,12 @@ export const ActionApiFp = function(configuration?: Configuration) {
          * @param {FarcasterActionReqBody} farcaster_action_req_body  
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * @returns {Promise<{ [key: string]: any | undefined; }>} A promise that resolves to a `{ [key: string]: any | undefined; }` object
+         * @returns {Promise<{ [key: string]: any; }>} A promise that resolves to a `{ [key: string]: any; }` object
          * 
          * For more information, refer to the [API documentation](https://docs.neynar.com/docs/farcaster-actions-spec)
          * 
          */
-        async publishFarcasterAction(farcaster_action_req_body: FarcasterActionReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any | undefined; }>> {
+        async publishFarcasterAction(farcaster_action_req_body: FarcasterActionReqBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: any; }>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.publishFarcasterAction(farcaster_action_req_body, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ActionApi.publishFarcasterAction']?.[localVarOperationServerIndex]?.url;
@@ -115,12 +115,12 @@ export const ActionApiFactory = function (configuration?: Configuration, basePat
          * @param {ActionApiPublishFarcasterActionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
-         * @returns {Promise<{ [key: string]: any | undefined; }>} A promise that resolves to a `{ [key: string]: any | undefined; }` object
+         * @returns {Promise<{ [key: string]: any; }>} A promise that resolves to a `{ [key: string]: any; }` object
          * 
          * For more information, refer to the [API documentation](https://docs.neynar.com/docs/farcaster-actions-spec)
          * 
          */
-        publishFarcasterAction(requestParameters: ActionApiPublishFarcasterActionRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any | undefined; }> {
+        publishFarcasterAction(requestParameters: ActionApiPublishFarcasterActionRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any; }> {
             return localVarFp.publishFarcasterAction(requestParameters.farcaster_action_req_body, options).then((request) => request(axios, basePath));
         },
     };
@@ -139,12 +139,12 @@ export interface ActionApiInterface {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ActionApiInterface
-     * @returns {Promise<{ [key: string]: any | undefined; }>} A promise that resolves to a `{ [key: string]: any | undefined; }` object
+     * @returns {Promise<{ [key: string]: any; }>} A promise that resolves to a `{ [key: string]: any; }` object
      * 
      * For more information, refer to the [API documentation](https://docs.neynar.com/docs/farcaster-actions-spec)
      * 
      */
-    publishFarcasterAction(requestParameters: ActionApiPublishFarcasterActionRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any | undefined; }>;
+    publishFarcasterAction(requestParameters: ActionApiPublishFarcasterActionRequest, options?: RawAxiosRequestConfig): AxiosPromise<{ [key: string]: any; }>;
 
 }
 
@@ -178,7 +178,7 @@ export class ActionApi extends BaseAPI implements ActionApiInterface {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ActionApi
-     * @returns {Promise<{ [key: string]: any | undefined; }>} A promise that resolves to a `{ [key: string]: any | undefined; }` object
+     * @returns {Promise<{ [key: string]: any; }>} A promise that resolves to a `{ [key: string]: any; }` object
      * 
      * For more information, refer to the [API documentation](https://docs.neynar.com/docs/farcaster-actions-spec)
      * 
