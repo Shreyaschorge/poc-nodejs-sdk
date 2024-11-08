@@ -20,7 +20,7 @@ import { StorageApi } from '../api/apis/storage-api';
 import { SubscribersApi } from '../api/apis/subscribers-api';
 import { UserApi } from '../api/apis/user-api';
 import { WebhookApi } from '../api/apis/webhook-api';
-import type { AddVerificationReqBody, AuthorizationUrlResponse, AuthorizationUrlResponseType, BanListResponse, BanReqBody, BanResponse, BlockListResponse, BlockReqBody, BulkCastsResponse, BulkFollowResponse, BulkUsersByAddressResponse, BulkUsersResponse, BuyStorageReqBody, CastComposerActionsListResponse, CastComposerType, CastConversationSortType, CastParamType, CastResponse, CastsResponse, CastsSearchResponse, ChannelFollowReqBody, ChannelListResponse, ChannelMemberInviteListResponse, ChannelMemberListResponse, ChannelMemberRole, ChannelResponse, ChannelResponseBulk, ChannelSearchResponse, ChannelType, Conversation, DeleteCastReqBody, DeleteFrameReqBody, DeleteFrameResponse, DeveloperManagedSigner, EmbedType, ErrorRes, FarcasterActionReqBody, FarcasterActionReqBodyAction, FeedResponse, FeedTrendingProvider, FeedType, FetchBulkCastsSortTypeEnum, FetchFrameMetaTagsFromUrl200Response, FetchRepliesAndRecastsForUserFilterEnum, FetchTrendingChannelsTimeWindowEnum, FetchTrendingFeedTimeWindowEnum, FetchValidateFrameAnalyticsAggregateWindowEnum, FilterType, FnameAvailabilityResponse, FollowReqBody, FollowSortType, FollowersResponse, ForYouProvider, Frame, FrameAction, FrameActionReqBody, FrameDeveloperManagedActionReqBody, FrameSignaturePacket, FrameType, FrameValidateAnalyticsResponse, FrameValidateListResponse, InviteChannelMemberReqBody, LookupCastConversationFoldEnum, MarkNotificationsAsSeenReqBody, MuteListResponse, MuteReqBody, MuteResponse, NeynarFrame, NeynarFrameCreationReqBody, NeynarFramePage, NeynarFrameUpdateReqBody, NotificationType, NotificationsResponse, OperationResponse, PostCastReqBody, PostCastReqBodyEmbeds, PostCastResponse, ReactionReqBody, ReactionType, ReactionsCastResponse, ReactionsResponse, ReactionsType, RegisterDeveloperManagedSignedKeyReqBody, RegisterSignerKeyReqBody, RegisterUserReqBody, RegisterUserResponse, RelevantFollowersResponse, RemoveChannelMemberReqBody, RemoveVerificationReqBody, RespondChannelInviteReqBody, SignedKeyRequestSponsor, Signer, StorageAllocationsResponse, StorageUsageResponse, SubscribedToResponse, SubscribersResponse, SubscriptionProvider, SubscriptionProviders, SubscriptionsResponse, TrendingChannelResponse, UpdateUserReqBody, UpdateUserReqBodyLocation, UserFIDResponse, UserPowerLiteResponse, UserResponse, UserSearchResponse, UsersActiveChannelsResponse, UsersResponse, ValidateFrameActionReqBody, ValidateFrameActionResponse, ValidateFrameAnalyticsType, VerificationChainId, VerificationType, WebhookDeleteReqBody, WebhookListResponse, WebhookPatchReqBody, WebhookPatchReqBodyActiveEnum, WebhookPostReqBody, WebhookPutReqBody, WebhookResponse, WebhookSubscriptionFilters } from '../api';
+import type { AddVerificationReqBody, AuthorizationUrlResponse, AuthorizationUrlResponseType, BanListResponse, BanReqBody, BanResponse, BlockListResponse, BlockReqBody, BulkCastsResponse, BulkFollowResponse, BulkUsersByAddressResponse, BulkUsersResponse, BuyStorageReqBody, CastComposerActionsListResponse, CastComposerType, CastConversationSortType, CastParamType, CastResponse, CastsResponse, CastsSearchResponse, ChannelFollowReqBody, ChannelListResponse, ChannelMemberInviteListResponse, ChannelMemberListResponse, ChannelMemberRole, ChannelResponse, ChannelResponseBulk, ChannelSearchResponse, ChannelType, Conversation, DeleteCastReqBody, DeleteFrameReqBody, DeleteFrameResponse, DeveloperManagedSigner, EmbedType, ErrorRes, FarcasterActionReqBody, FarcasterActionReqBodyAction, FeedResponse, FeedTrendingProvider, FeedType, FetchBulkCastssSortTypeEnum, FetchFrameMetaTagsFromUrl200Response, FetchRepliesAndRecastsForUserFilterEnum, FetchTrendingChannelsTimeWindowEnum, FetchTrendingFeedTimeWindowEnum, FetchValidateFrameAnalyticsAggregateWindowEnum, FilterType, FnameAvailabilityResponse, FollowReqBody, FollowSortType, FollowersResponse, ForYouProvider, Frame, FrameAction, FrameActionReqBody, FrameDeveloperManagedActionReqBody, FrameSignaturePacket, FrameType, FrameValidateAnalyticsResponse, FrameValidateListResponse, InviteChannelMemberReqBody, LookupCastConversationFoldEnum, MarkNotificationsAsSeenReqBody, MuteListResponse, MuteReqBody, MuteResponse, NeynarFrame, NeynarFrameCreationReqBody, NeynarFramePage, NeynarFrameUpdateReqBody, NotificationType, NotificationsResponse, OperationResponse, PostCastReqBody, PostCastReqBodyEmbeds, PostCastResponse, ReactionReqBody, ReactionType, ReactionsCastResponse, ReactionsResponse, ReactionsType, RegisterDeveloperManagedSignedKeyReqBody, RegisterSignerKeyReqBody, RegisterUserReqBody, RegisterUserResponse, RelevantFollowersResponse, RemoveChannelMemberReqBody, RemoveVerificationReqBody, RespondChannelInviteReqBody, SignedKeyRequestSponsor, Signer, StorageAllocationsResponse, StorageUsageResponse, SubscribedToResponse, SubscribersResponse, SubscriptionProvider, SubscriptionProviders, SubscriptionsResponse, TrendingChannelResponse, UpdateUserReqBody, UpdateUserReqBodyLocation, UserFIDResponse, UserPowerLiteResponse, UserResponse, UserSearchResponse, UsersActiveChannelsResponse, UsersResponse, ValidateFrameActionReqBody, ValidateFrameActionResponse, ValidateFrameAnalyticsType, VerificationChainId, VerificationType, WebhookDeleteReqBody, WebhookListResponse, WebhookPatchReqBody, WebhookPatchReqBodyActiveEnum, WebhookPostReqBody, WebhookPutReqBody, WebhookResponse, WebhookSubscriptionFilters } from '../api';
 
 
 export interface NeynarAPIClientOptions {
@@ -201,6 +201,7 @@ const adjustedParams: any = { ..._params };
  * @param {object} params
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 20, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<BanListResponse>} A promise that resolves to a `BanListResponse` object.
  *
@@ -208,15 +209,16 @@ const adjustedParams: any = { ..._params };
  *
  * // Fill in the appropriate values
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchBanList({limit}).then(response => {
+ * client.fetchBanList({limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-ban-list)
  *
  */
-public async fetchBanList(params: { limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<BanListResponse> {
+public async fetchBanList(params: { limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<BanListResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.banApi.fetchBanList(adjustedParams, options);
@@ -295,6 +297,7 @@ const adjustedParams: any = { ..._params };
  * @param {number} params.blocked_fid [optional]  - Providing this will return the users that have blocked this user
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 20, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<BlockListResponse>} A promise that resolves to a `BlockListResponse` object.
  *
@@ -304,15 +307,16 @@ const adjustedParams: any = { ..._params };
  * const blocker_fid = 
  * const blocked_fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchBlockList({blocker_fid, blocked_fid, limit}).then(response => {
+ * client.fetchBlockList({blocker_fid, blocked_fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-block-list)
  *
  */
-public async fetchBlockList(params: { blocker_fid?: number, blocked_fid?: number, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<BlockListResponse> {
+public async fetchBlockList(params: { blocker_fid?: number, blocked_fid?: number, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<BlockListResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.blockApi.fetchBlockList(adjustedParams, options);
@@ -391,7 +395,7 @@ const adjustedParams: any = { ..._params };
  * @param {object} params
  * @param {string[]} params.casts  - Hashes of the cast to be retrived (Comma separated, no spaces)
  * @param {number} params.viewer_fid [optional]  - adds viewer_context to cast object to show whether viewer has liked or recasted the cast.
- * @param {FetchBulkCastsSortTypeEnum} params.sort_type [optional]  - Optional parameter to sort the casts based on different criteria
+ * @param {FetchBulkCastssSortTypeEnum} params.sort_type [optional]  - Optional parameter to sort the casts based on different criteria
  *
  * @returns {Promise<CastsResponse>} A promise that resolves to a `CastsResponse` object.
  *
@@ -402,20 +406,20 @@ const adjustedParams: any = { ..._params };
  * const viewer_fid = 
  * const sort_type = 
  *
- * client.fetchBulkCasts({casts, viewer_fid, sort_type}).then(response => {
+ * client.fetchBulkCastss({casts, viewer_fid, sort_type}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-casts)
  *
  */
-public async fetchBulkCasts(params: { casts: string[], viewer_fid?: number, sort_type?: FetchBulkCastsSortTypeEnum }, options?: RawAxiosRequestConfig): Promise<CastsResponse> {
+public async fetchBulkCastss(params: { casts: string[], viewer_fid?: number, sort_type?: FetchBulkCastssSortTypeEnum }, options?: RawAxiosRequestConfig): Promise<CastsResponse> {
   const adjustedParams: any = { ...params };
 if (adjustedParams.casts && Array.isArray(adjustedParams.casts)) {
   adjustedParams.casts = adjustedParams.casts.join(",");
 }
 
-  const response = await this.apis.castApi.fetchBulkCasts(adjustedParams, options);
+  const response = await this.apis.castApi.fetchBulkCastss(adjustedParams, options);
   return response.data;
 }
 
@@ -722,6 +726,7 @@ public async fetchChannelInvites(params: { channel_id?: string, invited_fid?: nu
  * @param {number} params.fid [optional]  - FID of the user being queried. Specify this to check if a user is a member of the channel without paginating through all members.
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 20, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<ChannelMemberListResponse>} A promise that resolves to a `ChannelMemberListResponse` object.
  *
@@ -731,15 +736,16 @@ public async fetchChannelInvites(params: { channel_id?: string, invited_fid?: nu
  * const channel_id = 
  * const fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchChannelMembers({channel_id, fid, limit}).then(response => {
+ * client.fetchChannelMembers({channel_id, fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-channel-members)
  *
  */
-public async fetchChannelMembers(params: { channel_id: string, fid?: number, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<ChannelMemberListResponse> {
+public async fetchChannelMembers(params: { channel_id: string, fid?: number, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<ChannelMemberListResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.channelApi.fetchChannelMembers(adjustedParams, options);
@@ -756,6 +762,7 @@ public async fetchChannelMembers(params: { channel_id: string, fid?: number, lim
  * @param {number} params.viewer_fid [optional]  - Providing this will return a list of followers that respects this user's mutes and blocks and includes `viewer_context`.
  * @param {string} params.cursor [optional]  - Pagination cursor.
  * @param {number} params.limit [optional]  - Number of followers to fetch (Default: 25, Maximum: 1000)
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object.
  *
@@ -765,15 +772,16 @@ public async fetchChannelMembers(params: { channel_id: string, fid?: number, lim
  * const id = 
  * const viewer_fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchFollowersForAChannel({id, viewer_fid, limit}).then(response => {
+ * client.fetchFollowersForAChannel({id, viewer_fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-followers-for-a-channel)
  *
  */
-public async fetchFollowersForAChannel(params: { id: string, viewer_fid?: number, cursor?: string, limit?: number }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
+public async fetchFollowersForAChannel(params: { id: string, viewer_fid?: number, cursor?: string, limit?: number, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.channelApi.fetchFollowersForAChannel(adjustedParams, options);
@@ -788,6 +796,7 @@ public async fetchFollowersForAChannel(params: { id: string, viewer_fid?: number
  * @param {object} params
  * @param {string} params.id  - Channel ID being queried
  * @param {number} params.viewer_fid  - The FID of the user to customize this response for. Providing this will also return a list of followers that respects this user's mutes and blocks and includes `viewer_context`.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<RelevantFollowersResponse>} A promise that resolves to a `RelevantFollowersResponse` object.
  *
@@ -796,15 +805,16 @@ public async fetchFollowersForAChannel(params: { id: string, viewer_fid?: number
  * // Fill in the appropriate values
  * const id = 
  * const viewer_fid = 
+ * const x_neynar_experimental = 
  *
- * client.fetchRelevantFollowersForAChannel({id, viewer_fid}).then(response => {
+ * client.fetchRelevantFollowersForAChannel({id, viewer_fid, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-relevant-followers-for-a-channel)
  *
  */
-public async fetchRelevantFollowersForAChannel(params: { id: string, viewer_fid: number }, options?: RawAxiosRequestConfig): Promise<RelevantFollowersResponse> {
+public async fetchRelevantFollowersForAChannel(params: { id: string, viewer_fid: number, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<RelevantFollowersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.channelApi.fetchRelevantFollowersForAChannel(adjustedParams, options);
@@ -1605,6 +1615,7 @@ public async isFnameAvailable(params: { fname: string }, options?: RawAxiosReque
  * @param {number} params.fid  - FID of the user whose following you want to fetch.
  * @param {number} params.viewer_fid [optional]  - Providing this will return a list of users that respects this user's mutes and blocks and includes `viewer_context`.
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 25, Maximum: 100)
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object.
  *
@@ -1614,15 +1625,16 @@ public async isFnameAvailable(params: { fname: string }, options?: RawAxiosReque
  * const fid = 
  * const viewer_fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchFollowSuggestions({fid, viewer_fid, limit}).then(response => {
+ * client.fetchFollowSuggestions({fid, viewer_fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-follow-suggestions)
  *
  */
-public async fetchFollowSuggestions(params: { fid: number, viewer_fid?: number, limit?: number }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
+public async fetchFollowSuggestions(params: { fid: number, viewer_fid?: number, limit?: number, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.followsApi.fetchFollowSuggestions(adjustedParams, options);
@@ -1637,6 +1649,7 @@ public async fetchFollowSuggestions(params: { fid: number, viewer_fid?: number, 
  * @param {object} params
  * @param {number} params.target_fid  - User who's profile you are looking at
  * @param {number} params.viewer_fid  - The FID of the user to customize this response for. Providing this will also return a list of followers that respects this user's mutes and blocks and includes `viewer_context`.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<RelevantFollowersResponse>} A promise that resolves to a `RelevantFollowersResponse` object.
  *
@@ -1645,15 +1658,16 @@ public async fetchFollowSuggestions(params: { fid: number, viewer_fid?: number, 
  * // Fill in the appropriate values
  * const target_fid = 
  * const viewer_fid = 
+ * const x_neynar_experimental = 
  *
- * client.fetchRelevantFollowers({target_fid, viewer_fid}).then(response => {
+ * client.fetchRelevantFollowers({target_fid, viewer_fid, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-relevant-followers)
  *
  */
-public async fetchRelevantFollowers(params: { target_fid: number, viewer_fid: number }, options?: RawAxiosRequestConfig): Promise<RelevantFollowersResponse> {
+public async fetchRelevantFollowers(params: { target_fid: number, viewer_fid: number, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<RelevantFollowersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.followsApi.fetchRelevantFollowers(adjustedParams, options);
@@ -1671,6 +1685,7 @@ public async fetchRelevantFollowers(params: { target_fid: number, viewer_fid: nu
  * @param {FollowSortType} params.sort_type [optional]  - Sort type for fetch followers. Default is `desc_chron`
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 20, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<FollowersResponse>} A promise that resolves to a `FollowersResponse` object.
  *
@@ -1681,15 +1696,16 @@ public async fetchRelevantFollowers(params: { target_fid: number, viewer_fid: nu
  * const viewer_fid = 
  * const sort_type = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchUserFollowers({fid, viewer_fid, sort_type, limit}).then(response => {
+ * client.fetchUserFollowers({fid, viewer_fid, sort_type, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-followers)
  *
  */
-public async fetchUserFollowers(params: { fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<FollowersResponse> {
+public async fetchUserFollowers(params: { fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<FollowersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.followsApi.fetchUserFollowers(adjustedParams, options);
@@ -1707,6 +1723,7 @@ public async fetchUserFollowers(params: { fid: number, viewer_fid?: number, sort
  * @param {FollowSortType} params.sort_type [optional]  - Optional parameter to sort the users based on different criteria.
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 25, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<FollowersResponse>} A promise that resolves to a `FollowersResponse` object.
  *
@@ -1717,15 +1734,16 @@ public async fetchUserFollowers(params: { fid: number, viewer_fid?: number, sort
  * const viewer_fid = 
  * const sort_type = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchUserFollowing({fid, viewer_fid, sort_type, limit}).then(response => {
+ * client.fetchUserFollowing({fid, viewer_fid, sort_type, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-user-following)
  *
  */
-public async fetchUserFollowing(params: { fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<FollowersResponse> {
+public async fetchUserFollowing(params: { fid: number, viewer_fid?: number, sort_type?: FollowSortType, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<FollowersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.followsApi.fetchUserFollowing(adjustedParams, options);
@@ -2120,6 +2138,7 @@ const adjustedParams: any = { ..._params };
  * @param {number} params.fid  - The user's FID (identifier)
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 20, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<MuteListResponse>} A promise that resolves to a `MuteListResponse` object.
  *
@@ -2128,15 +2147,16 @@ const adjustedParams: any = { ..._params };
  * // Fill in the appropriate values
  * const fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchMuteList({fid, limit}).then(response => {
+ * client.fetchMuteList({fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-mute-list)
  *
  */
-public async fetchMuteList(params: { fid: number, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<MuteListResponse> {
+public async fetchMuteList(params: { fid: number, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<MuteListResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.muteApi.fetchMuteList(adjustedParams, options);
@@ -2919,6 +2939,7 @@ const adjustedParams: any = { ..._params };
  * @param {object} params
  * @param {number[]} params.fids  - Comma separated list of FIDs, up to 100 at a time
  * @param {number} params.viewer_fid [optional] 
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<BulkUsersResponse>} A promise that resolves to a `BulkUsersResponse` object.
  *
@@ -2927,15 +2948,16 @@ const adjustedParams: any = { ..._params };
  * // Fill in the appropriate values
  * const fids = 
  * const viewer_fid = 
+ * const x_neynar_experimental = 
  *
- * client.fetchBulkUsers({fids, viewer_fid}).then(response => {
+ * client.fetchBulkUsers({fids, viewer_fid, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-users)
  *
  */
-public async fetchBulkUsers(params: { fids: number[], viewer_fid?: number }, options?: RawAxiosRequestConfig): Promise<BulkUsersResponse> {
+public async fetchBulkUsers(params: { fids: number[], viewer_fid?: number, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<BulkUsersResponse> {
   const adjustedParams: any = { ...params };
 if (adjustedParams.fids && Array.isArray(adjustedParams.fids)) {
   adjustedParams.fids = adjustedParams.fids.map(value => (String(value)));
@@ -2957,6 +2979,7 @@ if (adjustedParams.fids && Array.isArray(adjustedParams.fids)) {
  * @param {string[]} params.addresses  - Comma separated list of Ethereum addresses, up to 350 at a time
  * @param {string[]} params.address_types [optional]  - Customize which address types the request should search for. This is a comma-separated string that can include the following values: 'custody_address' and 'verified_address'. By default api returns both. To select multiple types, use a comma-separated list of these values.
  * @param {number} params.viewer_fid [optional] 
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<BulkUsersByAddressResponse>} A promise that resolves to a `BulkUsersByAddressResponse` object.
  *
@@ -2966,15 +2989,16 @@ if (adjustedParams.fids && Array.isArray(adjustedParams.fids)) {
  * const addresses = 
  * const address_types = 
  * const viewer_fid = 
+ * const x_neynar_experimental = 
  *
- * client.fetchBulkUsersByEthereumAddress({addresses, address_types, viewer_fid}).then(response => {
+ * client.fetchBulkUsersByEthereumAddress({addresses, address_types, viewer_fid, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-users-by-ethereum-address)
  *
  */
-public async fetchBulkUsersByEthereumAddress(params: { addresses: string[], address_types?: string[], viewer_fid?: number }, options?: RawAxiosRequestConfig): Promise<BulkUsersByAddressResponse> {
+public async fetchBulkUsersByEthereumAddress(params: { addresses: string[], address_types?: string[], viewer_fid?: number, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<BulkUsersByAddressResponse> {
   const adjustedParams: any = { ...params };
 if (adjustedParams.addresses && Array.isArray(adjustedParams.addresses)) {
   adjustedParams.addresses = adjustedParams.addresses.join(",");
@@ -2996,6 +3020,7 @@ if (adjustedParams.address_types && Array.isArray(adjustedParams.address_types))
  * @param {number} params.viewer_fid [optional] 
  * @param {number} params.limit [optional]  - Number of power users to fetch (Default: 25, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object.
  *
@@ -3004,15 +3029,16 @@ if (adjustedParams.address_types && Array.isArray(adjustedParams.address_types))
  * // Fill in the appropriate values
  * const viewer_fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchPowerUsers({viewer_fid, limit}).then(response => {
+ * client.fetchPowerUsers({viewer_fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-power-users)
  *
  */
-public async fetchPowerUsers(params: { viewer_fid?: number, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
+public async fetchPowerUsers(params: { viewer_fid?: number, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.userApi.fetchPowerUsers(adjustedParams, options);
@@ -3024,21 +3050,27 @@ public async fetchPowerUsers(params: { viewer_fid?: number, limit?: number, curs
  *
  * @summary Power user FIDs
  *
+ * @param {object} params
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UserPowerLiteResponse>} A promise that resolves to a `UserPowerLiteResponse` object.
  *
  * @example
  *
- * client.fetchPowerUsersLite().then(response => {
+ * // Fill in the appropriate values
+ * const x_neynar_experimental = 
+ *
+ * client.fetchPowerUsersLite({x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-power-users-lite)
  *
  */
-public async fetchPowerUsersLite(options?: RawAxiosRequestConfig): Promise<UserPowerLiteResponse> {
-  
-  const response = await this.apis.userApi.fetchPowerUsersLite(options);
+public async fetchPowerUsersLite(params: { x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UserPowerLiteResponse> {
+  const adjustedParams: any = { ...params };
+
+  const response = await this.apis.userApi.fetchPowerUsersLite(adjustedParams, options);
   return response.data;
 }
 
@@ -3053,6 +3085,7 @@ public async fetchPowerUsersLite(options?: RawAxiosRequestConfig): Promise<UserP
  * @param {number} params.viewer_fid [optional]  - FID of the user viewing the feed. Providing this will return a list of users that respects this user's mutes and blocks and includes `viewer_context`.
  * @param {number} params.limit [optional]  - Number of results to fetch (Default: 25, Maximum: 100)
  * @param {string} params.cursor [optional]  - Pagination cursor
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UsersResponse>} A promise that resolves to a `UsersResponse` object.
  *
@@ -3063,15 +3096,16 @@ public async fetchPowerUsersLite(options?: RawAxiosRequestConfig): Promise<UserP
  * const longitude = 
  * const viewer_fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.fetchUsersByLocation({latitude, longitude, viewer_fid, limit}).then(response => {
+ * client.fetchUsersByLocation({latitude, longitude, viewer_fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-users-by-location)
  *
  */
-public async fetchUsersByLocation(params: { latitude: number, longitude: number, viewer_fid?: number, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
+public async fetchUsersByLocation(params: { latitude: number, longitude: number, viewer_fid?: number, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UsersResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.userApi.fetchUsersByLocation(adjustedParams, options);
@@ -3115,21 +3149,27 @@ const adjustedParams: any = { ..._params };
  *
  * @summary Fetch fresh FID
  *
+ * @param {object} params
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UserFIDResponse>} A promise that resolves to a `UserFIDResponse` object.
  *
  * @example
  *
- * client.getFreshAccountFID().then(response => {
+ * // Fill in the appropriate values
+ * const x_neynar_experimental = 
+ *
+ * client.getFreshAccountFID({x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/get-fresh-account-fid)
  *
  */
-public async getFreshAccountFID(options?: RawAxiosRequestConfig): Promise<UserFIDResponse> {
-  
-  const response = await this.apis.userApi.getFreshAccountFID(options);
+public async getFreshAccountFID(params: { x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UserFIDResponse> {
+  const adjustedParams: any = { ...params };
+
+  const response = await this.apis.userApi.getFreshAccountFID(adjustedParams, options);
   return response.data;
 }
 
@@ -3170,6 +3210,7 @@ public async lookupUserByCustodyAddress(params: { custody_address: string }, opt
  * @param {object} params
  * @param {string} params.username  - Username of the user to fetch
  * @param {number} params.viewer_fid [optional] 
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UserResponse>} A promise that resolves to a `UserResponse` object.
  *
@@ -3178,15 +3219,16 @@ public async lookupUserByCustodyAddress(params: { custody_address: string }, opt
  * // Fill in the appropriate values
  * const username = 
  * const viewer_fid = 
+ * const x_neynar_experimental = 
  *
- * client.lookupUserByUsername({username, viewer_fid}).then(response => {
+ * client.lookupUserByUsername({username, viewer_fid, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/lookup-user-by-username)
  *
  */
-public async lookupUserByUsername(params: { username: string, viewer_fid?: number }, options?: RawAxiosRequestConfig): Promise<UserResponse> {
+public async lookupUserByUsername(params: { username: string, viewer_fid?: number, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UserResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.userApi.lookupUserByUsername(adjustedParams, options);
@@ -3281,6 +3323,7 @@ const adjustedParams: any = { ..._params };
  * @param {number} params.viewer_fid [optional]  - Providing this will return search results that respects this user's mutes and blocks and includes `viewer_context`.
  * @param {number} params.limit [optional]  - Number of users to fetch (Default: 5, Maximum: 10)
  * @param {string} params.cursor [optional]  - Pagination cursor.
+ * @param {boolean} params.x_neynar_experimental [optional]  - Enables experimental features
  *
  * @returns {Promise<UserSearchResponse>} A promise that resolves to a `UserSearchResponse` object.
  *
@@ -3290,15 +3333,16 @@ const adjustedParams: any = { ..._params };
  * const q = 
  * const viewer_fid = 
  * const limit = 
+ * const x_neynar_experimental = 
  *
- * client.searchUser({q, viewer_fid, limit}).then(response => {
+ * client.searchUser({q, viewer_fid, limit, x_neynar_experimental}).then(response => {
  *   console.log('response:', response);
  * });
  *
  * For more information, refer to the [API documentation](https://docs.neynar.com/reference/search-user)
  *
  */
-public async searchUser(params: { q: string, viewer_fid?: number, limit?: number, cursor?: string }, options?: RawAxiosRequestConfig): Promise<UserSearchResponse> {
+public async searchUser(params: { q: string, viewer_fid?: number, limit?: number, cursor?: string, x_neynar_experimental?: boolean }, options?: RawAxiosRequestConfig): Promise<UserSearchResponse> {
   const adjustedParams: any = { ...params };
 
   const response = await this.apis.userApi.searchUser(adjustedParams, options);

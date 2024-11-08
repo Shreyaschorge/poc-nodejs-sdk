@@ -101,7 +101,7 @@ export const CastApiAxiosParamCreator = function (configuration?: Configuration)
          * @summary Bulk fetch casts
          * @param {string} casts Hashes of the cast to be retrived (Comma separated, no spaces) 
          * @param {number} [viewer_fid] adds viewer_context to cast object to show whether viewer has liked or recasted the cast. 
-         * @param {FetchBulkCastsSortTypeEnum} [sort_type] Optional parameter to sort the casts based on different criteria 
+         * @param {FetchBulkCastssSortTypeEnum} [sort_type] Optional parameter to sort the casts based on different criteria 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<CastsResponse>} A promise that resolves to a `CastsResponse` object
@@ -109,9 +109,9 @@ export const CastApiAxiosParamCreator = function (configuration?: Configuration)
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-casts)
          * 
          */
-        fetchBulkCasts: async (casts: string, viewer_fid?: number, sort_type?: FetchBulkCastsSortTypeEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        fetchBulkCastss: async (casts: string, viewer_fid?: number, sort_type?: FetchBulkCastssSortTypeEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'casts' is not null or undefined
-            assertParamExists('fetchBulkCasts', 'casts', casts)
+            assertParamExists('fetchBulkCastss', 'casts', casts)
             const localVarPath = `/farcaster/casts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -500,7 +500,7 @@ export const CastApiFp = function(configuration?: Configuration) {
          * @summary Bulk fetch casts
          * @param {string} casts Hashes of the cast to be retrived (Comma separated, no spaces) 
          * @param {number} [viewer_fid] adds viewer_context to cast object to show whether viewer has liked or recasted the cast. 
-         * @param {FetchBulkCastsSortTypeEnum} [sort_type] Optional parameter to sort the casts based on different criteria 
+         * @param {FetchBulkCastssSortTypeEnum} [sort_type] Optional parameter to sort the casts based on different criteria 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<CastsResponse>} A promise that resolves to a `CastsResponse` object
@@ -508,10 +508,10 @@ export const CastApiFp = function(configuration?: Configuration) {
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-casts)
          * 
          */
-        async fetchBulkCasts(casts: string, viewer_fid?: number, sort_type?: FetchBulkCastsSortTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CastsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchBulkCasts(casts, viewer_fid, sort_type, options);
+        async fetchBulkCastss(casts: string, viewer_fid?: number, sort_type?: FetchBulkCastssSortTypeEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CastsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fetchBulkCastss(casts, viewer_fid, sort_type, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CastApi.fetchBulkCasts']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CastApi.fetchBulkCastss']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
@@ -645,7 +645,7 @@ export const CastApiFactory = function (configuration?: Configuration, basePath?
         /**
          * Fetch multiple casts using their respective hashes.
          * @summary Bulk fetch casts
-         * @param {CastApiFetchBulkCastsRequest} requestParameters Request parameters.
+         * @param {CastApiFetchBulkCastssRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          * @returns {Promise<CastsResponse>} A promise that resolves to a `CastsResponse` object
@@ -653,8 +653,8 @@ export const CastApiFactory = function (configuration?: Configuration, basePath?
          * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-casts)
          * 
          */
-        fetchBulkCasts(requestParameters: CastApiFetchBulkCastsRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastsResponse> {
-            return localVarFp.fetchBulkCasts(requestParameters.casts, requestParameters.viewer_fid, requestParameters.sort_type, options).then((request) => request(axios, basePath));
+        fetchBulkCastss(requestParameters: CastApiFetchBulkCastssRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastsResponse> {
+            return localVarFp.fetchBulkCastss(requestParameters.casts, requestParameters.viewer_fid, requestParameters.sort_type, options).then((request) => request(axios, basePath));
         },
         /**
          * Fetches all composer actions on Warpcast. You can filter by top or featured.
@@ -752,7 +752,7 @@ export interface CastApiInterface {
     /**
      * Fetch multiple casts using their respective hashes.
      * @summary Bulk fetch casts
-     * @param {CastApiFetchBulkCastsRequest} requestParameters Request parameters.
+     * @param {CastApiFetchBulkCastssRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CastApiInterface
@@ -761,7 +761,7 @@ export interface CastApiInterface {
      * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-casts)
      * 
      */
-    fetchBulkCasts(requestParameters: CastApiFetchBulkCastsRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastsResponse>;
+    fetchBulkCastss(requestParameters: CastApiFetchBulkCastssRequest, options?: RawAxiosRequestConfig): AxiosPromise<CastsResponse>;
 
     /**
      * Fetches all composer actions on Warpcast. You can filter by top or featured.
@@ -852,17 +852,17 @@ export interface CastApiDeleteCastRequest {
 }
 
 /**
- * Request parameters for fetchBulkCasts operation in CastApi.
+ * Request parameters for fetchBulkCastss operation in CastApi.
  * @export
- * @interface CastApiFetchBulkCastsRequest
+ * @interface CastApiFetchBulkCastssRequest
  */
-export interface CastApiFetchBulkCastsRequest {
+export interface CastApiFetchBulkCastssRequest {
     /**
      * Hashes of the cast to be retrived (Comma separated, no spaces)
      * 
      * @commaSeparated
      * @type {string}
-     * @memberof CastApiFetchBulkCasts
+     * @memberof CastApiFetchBulkCastss
      */
     readonly casts: string
 
@@ -871,7 +871,7 @@ export interface CastApiFetchBulkCastsRequest {
      * 
      * 
      * @type {number}
-     * @memberof CastApiFetchBulkCasts
+     * @memberof CastApiFetchBulkCastss
      */
     readonly viewer_fid?: number
 
@@ -880,9 +880,9 @@ export interface CastApiFetchBulkCastsRequest {
      * 
      * 
      * @type {'trending' | 'likes' | 'recasts' | 'replies' | 'recent'}
-     * @memberof CastApiFetchBulkCasts
+     * @memberof CastApiFetchBulkCastss
      */
-    readonly sort_type?: FetchBulkCastsSortTypeEnum
+    readonly sort_type?: FetchBulkCastssSortTypeEnum
 }
 
 /**
@@ -1162,7 +1162,7 @@ export class CastApi extends BaseAPI implements CastApiInterface {
     /**
      * Fetch multiple casts using their respective hashes.
      * @summary Bulk fetch casts
-     * @param {CastApiFetchBulkCastsRequest} requestParameters Request parameters.
+     * @param {CastApiFetchBulkCastssRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CastApi
@@ -1171,8 +1171,8 @@ export class CastApi extends BaseAPI implements CastApiInterface {
      * For more information, refer to the [API documentation](https://docs.neynar.com/reference/fetch-bulk-casts)
      * 
      */
-    public fetchBulkCasts(requestParameters: CastApiFetchBulkCastsRequest, options?: RawAxiosRequestConfig) {
-        return CastApiFp(this.configuration).fetchBulkCasts(requestParameters.casts, requestParameters.viewer_fid, requestParameters.sort_type, options).then((request) => request(this.axios, this.basePath));
+    public fetchBulkCastss(requestParameters: CastApiFetchBulkCastssRequest, options?: RawAxiosRequestConfig) {
+        return CastApiFp(this.configuration).fetchBulkCastss(requestParameters.casts, requestParameters.viewer_fid, requestParameters.sort_type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1259,14 +1259,14 @@ export class CastApi extends BaseAPI implements CastApiInterface {
 /**
  * @export
  */
-export const FetchBulkCastsSortTypeEnum = {
+export const FetchBulkCastssSortTypeEnum = {
     Trending: 'trending',
     Likes: 'likes',
     Recasts: 'recasts',
     Replies: 'replies',
     Recent: 'recent'
 } as const;
-export type FetchBulkCastsSortTypeEnum = typeof FetchBulkCastsSortTypeEnum[keyof typeof FetchBulkCastsSortTypeEnum];
+export type FetchBulkCastssSortTypeEnum = typeof FetchBulkCastssSortTypeEnum[keyof typeof FetchBulkCastssSortTypeEnum];
 /**
  * @export
  */
